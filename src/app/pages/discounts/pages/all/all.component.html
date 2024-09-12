@@ -1,0 +1,65 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <input class="form-control" name="filter" type="search" [(ngModel)]="filter" placeholder="Buscar..." />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header card-header-icon card-header-warning">
+                        <div class="card-icon">
+                            <i class="fa fa-percent" aria-hidden="true"></i>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-black text-center">
+                                <tr>
+                                    <th>Proveedor</th>
+                                    <th>Nombre de servicio</th>
+                                    <th>Tipo de servicio</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let provider of datadiscounts | filterproviders: filter  | paginate: { itemsPerPage: 5, currentPage: p }"
+                                    class="text-black text-center">
+                                    <td>{{provider.Provider}}</td>
+                                    <td>{{provider.ServiceName}}</td>
+                                    <td>{{provider.ServiceType}}</td>
+                                    <td>
+                                        <!-- <button class="btn btn-warning btn-sm" data-toggle="tooltip"
+                                            data-placement="top" title="Crear Código postal"
+                                            (click)="openModal('createpostal', country.CountryCode)">
+                                            <span class="material-symbols-outlined">
+                                                add
+                                            </span>
+                                        </button> -->
+
+                                        <button class="btn btn-warning btn-sm" data-toggle="tooltip"
+                                            data-placement="top" title="Buscar Código postal"
+                                            (click)="openModal('viewone')">
+                                            <span class="material-symbols-outlined">
+                                                search
+                                            </span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <pagination-controls class="my-pagination text-center" (pageChange)="p = $event"
+                            previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-viewone [id]="id"></app-viewone>

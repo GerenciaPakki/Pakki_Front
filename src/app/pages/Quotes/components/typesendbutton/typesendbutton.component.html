@@ -1,0 +1,10 @@
+<button
+  mat-raised-button
+  class="btn btn-warning"
+  (click)="selected()"
+  [ngClass]="{ selected: isSelected }"
+  [ngStyle]="{ 'background-color': isSelected ? 'green' : '' }"
+>
+  <span class="material-symbols-outlined"> {{ icon }} </span>
+  {{ label }}
+</button>

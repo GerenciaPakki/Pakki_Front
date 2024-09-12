@@ -1,0 +1,43 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-8 offset-2">
+                <div class="card">
+                    <form [formGroup]="addcommercialform">
+                        <div class="card-header card-header-warning card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">store</i>
+                            </div>
+                            <h4 class="card-title">Agregar Comercial</h4>
+                        </div>
+                        <div class="card-body mt-5">
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <app-input-nit [nitctr]="addcommercialform.get('businessname')"
+                                        [label]=" 'NIT del Negocio' "
+                                        (aliadoCambiado)="BusinessSelect($event)"></app-input-nit>
+
+                                </div>
+
+                                <div class="col-6">
+                                    <app-managers [manager]="addcommercialform?.get('nameassignedCommercial')"
+                                        [label]=" 'Colaborador' "
+                                        (managerSelected)="selectedManager($event)"></app-managers>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card-footer text-right">
+                            <button mat-raised-button (click)="SendData()" type="button" class="btn btn-warning"
+                                [disabled]="addcommercialform.invalid">Agregar</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

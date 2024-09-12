@@ -1,0 +1,10 @@
+/* En tu hoja de estilos personalizada */
+.btn-custom {
+  background-color: white; /* Cambia esto al color que prefieras */
+  color: black; /* Cambia el color del texto si es necesario */
+}
+
+.btn-custom.active {
+  background-color: orange !important; /* Fondo blanco cuando está seleccionado */
+  color: black !important; /* Cambia el color del texto si es necesario */
+}

@@ -1,0 +1,7 @@
+/* You can add global styles to this file, and also import other style files */
+.image-container {
+  background-color: white;
+  display: inline-block; /* Asegura que el contenedor se ajuste al tamaño de la imagen */
+  padding: 5px; /* Opcional: agrega espacio alrededor de la imagen */
+}
+@import "~bootstrap/dist/css/bootstrap.css";

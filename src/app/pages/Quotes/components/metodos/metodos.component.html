@@ -1,0 +1,204 @@
+<div class="row">
+  <div class="col-3">
+    <div class="card">
+      <div
+        class="card-header text-center"
+        style="background-color: rgb(219, 219, 219)"
+      >
+        <h4 class="text-dark">Efectivo</h4>
+      </div>
+      <div class="card-body">
+        <div class="text-center">
+          <button
+            class="btn btn-block btn-lg border-0 btn-warning"
+            type="button"
+            (click)="optionSelected('1')"
+          >
+            <i class="material-icons">attach_money</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card">
+      <div
+        class="card-header text-center"
+        style="background-color: rgb(219, 219, 219)"
+      >
+        <h4 class="text-dark">Paga en Línea</h4>
+      </div>
+      <div class="card-body">
+        <div class="ml-4 mt-2 mb-3">
+          <div id="buttonpay" #buttonpay>
+            <div class="row">
+              <div class="col-12 text-center">
+                <form class="formulario" #formulario>
+                  <div #script></div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card">
+      <div
+        class="card-header text-center"
+        style="background-color: rgb(219, 219, 219)"
+      >
+        <h4 class="text-dark">Paga Con Código QR</h4>
+      </div>
+      <div class="card-body">
+        <div class="text-center">
+          <button
+            class="btn btn-block border-0 btn-warning"
+            type="button"
+            (click)="optionSelected('3')"
+          >
+            <span class="material-symbols-outlined"> qr_code </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card">
+      <div
+        class="card-header text-center"
+        style="background-color: rgb(219, 219, 219)"
+      >
+        <h4 class="text-dark">Paga Con BOLT</h4>
+      </div>
+      <div class="card-body">
+        <div class="text-center">
+          <button
+            class="btn btn-block border-0 btn-warning"
+            type="button"
+            (click)="optionSelected('4')"
+          >
+            <img
+              src="../../../../../assets/img/dataphone.jpg"
+              alt="Imagen"
+              width="20%"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--  <div class="col-3">
+    <div
+      class="nav flex-column nav-pills bg-white"
+      id="v-pills-tab"
+      role="tablist"
+      aria-orientation="vertical"
+    >
+      <button
+        class="nav-link btn-custom active"
+        id="v-pills-home-tab"
+        data-toggle="pill"
+        data-target="#v-pills-home"
+        type="button"
+        (click)="optionSelected('1')"
+        role="tab"
+        aria-controls="v-pills-home"
+        aria-selected="true"
+      >
+        <i class="material-icons">attach_money</i>
+      </button>
+      <button
+        class="nav-link btn-custom"
+        id="v-pills-profile-tab"
+        data-toggle="pill"
+        data-target="#v-pills-profile"
+        type="button"
+        (click)="optionSelected('2')"
+        role="tab"
+        aria-controls="v-pills-profile"
+        aria-selected="false"
+      >
+        <i class="material-icons">credit_card</i>
+      </button>
+      <button
+        class="nav-link btn-custom"
+        (click)="optionSelected('3')"
+        id="v-pills-messages-tab"
+        data-toggle="pill"
+        data-target="#v-pills-messages"
+        type="button"
+        role="tab"
+        aria-controls="v-pills-messages"
+        aria-selected="false"
+      >
+        <span class="material-symbols-outlined"> qr_code </span>
+      </button>
+      <button
+        class="nav-link btn-custom"
+        id="v-pills-settings-tab"
+        data-toggle="pill"
+        data-target="#v-pills-settings"
+        type="button"
+        (click)="optionSelected('4')"
+        role="tab"
+        aria-controls="v-pills-settings"
+        aria-selected="false"
+      >
+        <img
+          src="../../../../../assets/img/dataphone.jpg"
+          alt="Imagen"
+          width="20%"
+        />
+      </button>
+    </div>
+  </div>
+  <div class="col-9">
+    <div class="tab-content" id="v-pills-tabContent">
+      <div
+        class="tab-pane fade show active"
+        id="v-pills-home"
+        role="tabpanel"
+        aria-labelledby="v-pills-home-tab"
+      >
+        <div>
+          <h3>Efectivo</h3>
+        </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="v-pills-profile"
+        role="tabpanel"
+        aria-labelledby="v-pills-profile-tab"
+      >
+        <div id="buttonpay" class="" #buttonpay>
+          <form class="formulario" #formulario>
+            <div #script></div>
+          </form>
+        </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="v-pills-messages"
+        role="tabpanel"
+        aria-labelledby="v-pills-messages-tab"
+      >
+        <div>
+          <h3>Bancolombia QR</h3>
+        </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="v-pills-settings"
+        role="tabpanel"
+        aria-labelledby="v-pills-settings-tab"
+      >
+        <div>
+          <h3>BOLT</h3>
+        </div>
+      </div>
+    </div>
+  </div> -->

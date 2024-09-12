@@ -1,0 +1,6 @@
+.modal-top {
+  position: absolute;
+  top: 0;
+  transform: translateY(0);
+  margin-left: 12%;
+}

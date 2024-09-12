@@ -1,0 +1,118 @@
+<div id="viewone" data-backdrop="static" data-keyboard="false" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Actualizar Descuento Proveedor</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="removeData()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-black text-center">
+                                <tr>
+                                    <th>Peso</th>
+                                    <th>Fee</th>
+                                    <th>Ratio increase</th>
+                                    <th>Pakki increase</th>
+                                    <th>Pakki discount</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let provider of dataProvider | paginate: { itemsPerPage: 5, currentPage: p } ; let i = index"
+                                    class="text-black text-center">
+
+                                    <td>{{provider.Weight}}</td>
+                                    <td>{{provider.Fee}}</td>
+                                    <td>{{provider.RateIncrease}}</td>
+                                    <td>{{provider.PakkiDiscount}}</td>
+                                    <td>{{provider.RateIncrease}}</td>
+                                    <td> <button type="button" class="btn btn-warning btn-sm float-right"
+                                            (click)="updateOne(i, provider)">
+                                            <span class="material-symbols-outlined">
+                                                edit
+                                            </span>
+                                        </button>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <pagination-controls class="my-pagination text-center" (pageChange)="p = $event"
+                            previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="viewbyid" data-backdrop="static" data-keyboard="false" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Ingrese nuevos datos</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    (click)="closeModal('viewbyid')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form [formGroup]="modifiedData">
+                        <div class="row">
+                            <div class="col-2">
+                                <mat-form-field class="w-100">
+                                    <input type="text" name="firstname" matInput id="text" formControlName="Weight"
+                                        placeholder="Peso">
+                                </mat-form-field>
+
+                            </div>
+                            <div class="col-2">
+                                <mat-form-field class="w-100">
+                                    <input type="text" name="firstname" matInput id="text" formControlName="Fee"
+                                        placeholder="Fee">
+                                </mat-form-field>
+
+                            </div>
+                            <div class="col-2">
+                                <mat-form-field class="w-100">
+                                    <input type="text" name="firstname" matInput id="text"
+                                        formControlName="RateIncrease" placeholder="RateIncrease">
+                                </mat-form-field>
+
+                            </div>
+                            <div class="col-2">
+                                <mat-form-field class="w-100">
+                                    <input type="text" name="firstname" matInput id="text"
+                                        formControlName="PakkiIncrease" placeholder="PakkiIncrease">
+                                </mat-form-field>
+
+                            </div>
+                            <div class="col-3">
+                                <mat-form-field class="w-100">
+                                    <input type="text" name="firstname" matInput id="text"
+                                        formControlName="PakkiDiscount" placeholder="PakkiDiscount">
+                                </mat-form-field>
+
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-warning float-right" (click)="sendData()">
+                            Guardar cambios
+                        </button>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

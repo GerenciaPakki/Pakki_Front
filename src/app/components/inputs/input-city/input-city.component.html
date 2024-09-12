@@ -1,0 +1,24 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <mat-label>{{ label }}</mat-label>
+    <input
+      matInput
+      aria-label="Envio"
+      [matAutocomplete]="auto"
+      (input)="onKeyUp()"
+      [formControl]="ciudad"
+    />
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option
+        *ngFor="let city of filteredStates | async"
+        [value]="city.CityName"
+        (click)="citySelect(city)"
+      >
+        <span class="ml-3">
+          {{ city.CityName }} - {{ city.StateName }} -
+          {{ city.PostalCodeCity }}</span
+        >
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

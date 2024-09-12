@@ -1,0 +1,61 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-8 offset-2">
+                <div class="card">
+                    <form [formGroup]="addcolaboratorform">
+                        <div class="card-header card-header-warning card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">store</i>
+                            </div>
+                            <h4 class="card-title">Agregar Colaborador</h4>
+                        </div>
+                        <div class="card-body mt-5">
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <app-input-nit [nitctr]="addcolaboratorform.get('businessname')"
+                                        [label]=" 'NIT del Negocio' "
+                                        (aliadoCambiado)="BusinessSelect($event)"></app-input-nit>
+
+                                </div>
+
+                                <div class="col-6">
+
+
+                                    <app-searchbranchoffices [nit]=" addcolaboratorform.get('nit_empresa').value "
+                                        [label]="'Sucursal'" (branchSelected)="branchSelect($event)"
+                                        [branchofficectr]="addcolaboratorform.get('id_brachOffice_name')">
+                                    </app-searchbranchoffices>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <app-managers [manager]="addcolaboratorform?.get('collaborator_name')"
+                                        [label]=" 'Colaborador' "
+                                        (managerSelected)="selectedManager($event)"></app-managers>
+
+                                </div>
+
+                                <div class="col-6">
+                                    <app-searchprofile [profilectr]=" addcolaboratorform?.get('profile_name') "
+                                        [label]="'Perfil'"
+                                        (profileChange)="profileSelected($event)"></app-searchprofile>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-right">
+                            <button mat-raised-button (click)="SendData()" type="button" class="btn btn-warning"
+                                [disabled]="addcolaboratorform.invalid">Agregar</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

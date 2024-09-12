@@ -1,0 +1,30 @@
+<mat-form-field>
+  <mat-label>{{ label }}</mat-label>
+  <input
+    matInput
+    aria-label="Envio"
+    [matAutocomplete]="auto"
+    [formControl]="sede"
+    placeholder="Aliados"
+  />
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option
+      *ngFor="let sede of filteredSedes | async"
+      [value]="sede.tradename"
+      (click)="sedeSelect(sede)"
+    >
+      <span class="ml-3">{{ sede.tradename }}</span>
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
+
+<!-- <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>State</mat-label>
+        <input matInput aria-label="State" [matAutocomplete]="auto" [formControl]="sede">
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let state of filteredStates | async" [value]="state.tradename">
+                <span>{{state.tradename}}</span>
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field> -->

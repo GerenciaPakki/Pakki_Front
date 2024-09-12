@@ -1,0 +1,203 @@
+<div
+  id="createcompany"
+  data-backdrop="static"
+  data-keyboard="false"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Crear Compañia</h4>
+
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="businesscreate">
+          <div class="mt-2">
+            <div class="row">
+              <div class="col-6">
+                <app-inputnumerico
+                  [control]="businesscreate.get('irs_nit')"
+                  [label]="'NIT'"
+                ></app-inputnumerico>
+              </div>
+              <div class="col-6">
+                <mat-form-field class="example-full-width has-label">
+                  <input
+                    type="text"
+                    matInput
+                    formControlName="businessname"
+                    placeholder="Nombre Comercial del establecimiento"
+                  />
+                </mat-form-field>
+              </div>
+              <!-- <div class="col-6">
+                                <mat-form-field class="example-full-width has-label">
+                                    <input type="text" matInput id="Trade Name" formControlName="tradename"
+                                        placeholder="Nombre de Sucursal" />
+                                </mat-form-field>
+                            </div> -->
+            </div>
+
+            <div class="row">
+              <div class="col-6">
+                <app-typecompany
+                  (selectedCompany)="selectedCompany($event)"
+                ></app-typecompany>
+              </div>
+              <div class="col-6">
+                <mat-form-field class="example-full-width has-label">
+                  <input
+                    type="text"
+                    matInput
+                    formControlName="mainaddress"
+                    placeholder="Dirección Principal"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <mat-form-field class="example-full-width has-label">
+                  <input
+                    type="email"
+                    matInput
+                    formControlName="email"
+                    placeholder="Email"
+                  />
+                </mat-form-field>
+              </div>
+
+              <div class="col-6">
+                <app-inputnumerico
+                  [control]="businesscreate.get('phoneNumber')"
+                  [label]="'Teléfono'"
+                ></app-inputnumerico>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <mat-form-field class="example-full-width has-label">
+                  <input
+                    type="text"
+                    matInput
+                    formControlName="phoneDescription"
+                    placeholder="Descripción de teléfono"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col-6">
+                <app-inputnumerico
+                  [control]="businesscreate.get('cellphoneNumber')"
+                  [label]="'Celular'"
+                ></app-inputnumerico>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-6">
+                <mat-form-field class="example-full-width has-label">
+                  <input
+                    type="text"
+                    matInput
+                    formControlName="cellphoneDescription"
+                    placeholder="Descripción Celular"
+                  />
+                </mat-form-field>
+              </div>
+
+              <div class="col-6">
+                <app-managers
+                  [manager]="businesscreate?.get('manager_name')"
+                  [label]="'Manager'"
+                  (managerSelected)="selectedManager($event)"
+                ></app-managers>
+              </div>
+            </div>
+            <div class="row">
+              <!-- <div class="col-6">
+                                <app-inputnumerico [control]="businesscreate.get('branchoffices')"
+                                    [label]="'Cantidad de sucursales'"></app-inputnumerico>
+                            </div> -->
+
+              <!--  <div class="col-6">
+                                <app-inputnumerico [control]="businesscreate.get('negotiationDiscount')"
+                                    [label]="'Valor Descuento'"></app-inputnumerico>
+
+                            </div> -->
+            </div>
+
+            <div class="row">
+              <div class="col-6">
+                <app-input-country
+                  (PaisCambiado)="onCountryChange($event)"
+                  [stateCtrl]="businesscreate.get('country')"
+                  [label]="'Pais'"
+                  [tipo]="1"
+                >
+                </app-input-country>
+              </div>
+              <div class="col-6">
+                <app-inputciudad
+                  [label]="'Ciudad'"
+                  [countrycode]="businesscreate.get('countrycode')"
+                  [ciudad]="businesscreate.get('city')"
+                  (ciudadCambiada)="onCityChange($event)"
+                ></app-inputciudad>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-6">
+                <mat-form-field class="example-full-width has-label">
+                  <input
+                    matInput
+                    placeholder="Estado"
+                    [value]="
+                      businesscreate?.get('city')?.value +
+                      '-' +
+                      businesscreate?.get('citycode')?.value
+                    "
+                    type="text"
+                    disabled
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col-6">
+                <mat-form-field class="example-full-width has-label">
+                  <input
+                    type="text"
+                    matInput
+                    formControlName="observation"
+                    placeholder="Observaciones"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <button
+          mat-raised-button
+          (click)="SendData()"
+          type="button"
+          class="btn btn-warning"
+          [disabled]="
+            businesscreate.invalid || businesscreate.get('manager').value == ''
+          "
+        >
+          Registrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

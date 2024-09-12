@@ -1,0 +1,94 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <input
+          class="form-control"
+          name="filter"
+          type="search"
+          [(ngModel)]="filter"
+          placeholder="Buscar..."
+        />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header card-header-icon card-header-warning">
+            <div class="card-icon">
+              <span class="material-symbols-outlined"> groups </span>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <h4 class="card-title">
+                  Información de Usuarios
+                  <button
+                    class="btn btn-warning btn-sm float-right"
+                    (click)="openModal('createuser')"
+                  >
+                    <span class="material-symbols-outlined"> add </span>
+                  </button>
+                </h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="text-black text-center">
+                <tr>
+                  <th>Nombre</th>
+                  <th>email</th>
+                  <th>Documento</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="
+                    let user of dataUser
+                      | filterusers : filter
+                      | paginate : { itemsPerPage: 5, currentPage: p }
+                  "
+                  class="text-black text-center"
+                >
+                  <td>{{ user.name + " " + user.lastName }}</td>
+                  <td>{{ user.email }}</td>
+                  <td>{{ user.docu }}</td>
+                  <td>
+                    <button
+                      class="btn btn-warning btn-sm"
+                      (click)="openModal('updateuser', user.docu)"
+                    >
+                      <span class="material-symbols-outlined"> edit </span>
+                    </button>
+                    <button
+                      class="btn btn-warning btn-sm"
+                      (click)="deleteUser(user.docu)"
+                    >
+                      <span class="material-symbols-outlined"> delete </span>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <pagination-controls
+              class="my-pagination text-center"
+              (pageChange)="p = $event"
+              previousLabel="Anterior"
+              nextLabel="Siguiente"
+            ></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-createuser (usuariocreado)="Usercreated($event)"></app-createuser>
+<app-updateuser
+  [userdoc]="userdoc"
+  (userUpdate)="userUpdate($event)"
+></app-updateuser>

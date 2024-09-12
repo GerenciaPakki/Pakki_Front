@@ -1,0 +1,12 @@
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+        <mat-label>{{label}}</mat-label>
+        <input matInput aria-label="Envio" [matAutocomplete]="auto" (input)="onKeyUp()" [formControl]="manager">
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let person of filteredmanager | async" [value]="person.fullName"
+                (click)="managerSelect(person)">
+                <span class="ml-3">{{person.fullName}}</span>
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</form>

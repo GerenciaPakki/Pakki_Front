@@ -1,0 +1,12 @@
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+        <mat-label>{{label}}</mat-label>
+        <input matInput [matAutocomplete]="auto" (input)="onKeyUp()" [formControl]="branchofficectr">
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let branch of filteredbranch | async" [value]="branch.tradename"
+                (click)="branchSelect(branch)">
+                <span class="ml-3">{{branch.tradename}}</span>
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</form>

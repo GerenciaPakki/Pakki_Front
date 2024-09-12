@@ -1,0 +1,184 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row align-items-center">
+      <div
+        class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 align-self-center"
+      >
+        <h6 class="card-title text-center">
+          {{ "tipo de envio" | uppercase }}
+        </h6>
+      </div>
+
+      <div class="col-12 col-sm-5 col-md-3 col-lg-3 col-xl-2">
+        <app-typesendbutton
+          (tiposeleccionado)="prueba($event)"
+          [value]="1"
+          [label]="'Paquete'"
+          [isSelected]="paquete_selected"
+          [icon]="'deployed_code'"
+        ></app-typesendbutton>
+      </div>
+      <div class="col-12 col-sm-5 col-md-3 col-lg-3 col-xl-2">
+        <app-typesendbutton
+          (tiposeleccionado)="prueba($event)"
+          [value]="2"
+          [label]="'Documento'"
+          [icon]="'drafts'"
+          [isSelected]="documento_selected"
+        ></app-typesendbutton>
+      </div>
+      <div class="col-12 col-sm-2 col-md-3 col-lg-3 col-xl-1">
+        <div
+          class="text-sm-left text-lg-center text-xl-left"
+          matTooltip="Solo hojas, no mayor de 2 kilos"
+          [matTooltipPosition]="'above'"
+        >
+          <span class="material-symbols-outlined"> info </span>
+        </div>
+      </div>
+      <div class="col-xl-3 d-none d-xl-block"></div>
+    </div>
+
+    <hr class="black-hr" />
+    <div class="row">
+      <div class="col-12 col-xl-3">
+        <app-input-country
+          (PaisCambiado)="onCountryChange($event)"
+          [stateCtrl]="Origin.get('nombre_pais_origen')"
+          [label]="'Pais Origen'"
+          [tipo]="1"
+          [valid]="pais_origen_valido"
+        ></app-input-country>
+      </div>
+      <div class="col-12 col-xl-3">
+        <app-input-country
+          [stateCtrl]="Destination.get('nombre_pais_destino')"
+          (PaisCambiado)="onCountryChange($event)"
+          [label]="'Pais Destino'"
+          [tipo]="2"
+          [valid]="pais_destino_valido"
+        ></app-input-country>
+      </div>
+
+      <div class="col-12 col-xl-1 ml-xl-5">
+        <mat-form-field class="">
+          <input
+            matInput
+            placeholder="Peso (Kg)"
+            type="number"
+            value="0.5"
+            min="0.5"
+            [max]="pesoMax"
+            [formControl]="peso"
+            step="0.5"
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-xl-1 ml-xl-5">
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            type="number"
+            placeholder="Largo (cm)"
+            value="1"
+            [formControl]="largo"
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-xl-1">
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            type="number"
+            placeholder="Ancho (cm)"
+            value="1"
+            [formControl]="ancho"
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-xl-1">
+        <mat-form-field class="w-100">
+          <input
+            matInput
+            type="number"
+            placeholder="Alto (cm)"
+            value="1"
+            [formControl]="alto"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-2">
+        <app-inputnumerico
+          [minLength]="[1]"
+          [maxLength]="10"
+          [label]="name_label_valor_asegurar"
+          [control]="valor_asegurar"
+        ></app-inputnumerico>
+      </div>
+
+      <div class="col-3">
+        <mat-form-field>
+          <input
+            matInput
+            [formControl]="fecha"
+            [matDatepickerFilter]="myFilter"
+            [matDatepicker]="picker"
+            placeholder="Fecha de Recolección"
+            (click)="picker.open()"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="col-3">
+        <mat-form-field>
+          <mat-label> Fecha de Envio</mat-label>
+          <mat-select [formControl]="horario">
+            <mat-option
+              (click)="UpdatedatePickup()"
+              *ngFor="let option of options"
+              [value]="option.value"
+            >
+              {{ option.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-3">
+        <p class="text-center">No aplica para documentos</p>
+      </div>
+    </div>
+    <div class="row justify-content-end">
+      <div class="col-4">
+        <button
+          mat-button
+          class="btn btn-warning w-100 float-right d-block"
+          (click)="setStep()"
+          [disabled]="
+            firststepForm.invalid ||
+            Destination.get('PostalCode').value == '' ||
+            Origin.get('PostalCode').value == ''
+          "
+        >
+          <span class="material-symbols-outlined"> search </span>
+          {{ paso2 ? "Recalcular" : "Comparar Tarifas" }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<app-datos-envio
+  (guardarCambios)="saveData($event)"
+  [formGroup]="tipo === 1 ? Origin : Destination"
+  [ciudad]="getCityControl()"
+  [tipo]="tipo"
+  (modalCerrado)="ModalCerrado($event)"
+></app-datos-envio>

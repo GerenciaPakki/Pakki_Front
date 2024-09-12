@@ -1,0 +1,12 @@
+.btn.selected::after {
+  content: "";
+  display: block;
+  width: calc(
+    100% - 10px
+  ); /* Ancho del pseudo-elemento, con un margen de 5px a cada lado */
+  height: 2px; /* Ajusta el grosor de la línea según sea necesario */
+  background-color: green; /* Color de la línea */
+  position: absolute;
+  bottom: -5px; /* Desplaza la línea hacia abajo para agregar un margen */
+  left: 5px; /* Desplaza la línea hacia la derecha para agregar un margen */
+}

@@ -1,0 +1,15 @@
+.button-container {
+  position: relative;
+  display: inline-block;
+  margin: 10px; /* Espacio entre los botones */
+}
+
+.button-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Color de fondo de la etiqueta */
+  color: white; /* Color del texto de la etiqueta */
+  padding: 5px 10px; /* Espaciado interno de la etiqueta */
+  border-radius: 5px; /* Bordes redondeados para la etiqueta */
+}

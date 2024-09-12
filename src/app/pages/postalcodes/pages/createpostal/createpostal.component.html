@@ -1,0 +1,146 @@
+<div
+  id="createpostal"
+  data-backdrop="static"
+  data-keyboard="false"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Crear Código Postal</h4>
+
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="removeData()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <form [formGroup]="createPostalCode">
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="Código postal"
+                    formControlName="PostalCodeCity"
+                    type="text"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <app-inputciudad
+                  [countrycode]="createPostalCode.get('CountryCode')"
+                  [ciudad]="createPostalCode.get('CityName')"
+                  [label]="'Ciudad'"
+                  (ciudadCambiada)="onCityChange($event)"
+                ></app-inputciudad>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="Nombre estado o departamento"
+                    formControlName="StateName"
+                    type="text"
+                  />
+                </mat-form-field>
+              </div>
+
+              <div class="col">
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="Número de Estado"
+                    formControlName="StateCode"
+                    type="text"
+                    maxlength="10"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+
+            <!-- <div class="row">
+                
+              <div class="col">
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="Cam1"
+                    formControlName="Cam1"
+                    type="text"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="Cam2"
+                    formControlName="Cam2"
+                    type="text"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="Lat"
+                    formControlName="Lat"
+                    type="text"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="Log"
+                    formControlName="Log"
+                    type="text"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="Cam3"
+                    formControlName="Cam3"
+                    type="text"
+                  />
+                </mat-form-field>
+              </div>
+            </div> -->
+
+            <button
+              type="button"
+              class="btn btn-warning float-right"
+              (click)="sendData()"
+              [disabled]="createPostalCode.invalid"
+            >
+              Crear Cógigo
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

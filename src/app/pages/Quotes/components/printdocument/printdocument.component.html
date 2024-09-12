@@ -1,0 +1,100 @@
+<div class="row">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
+    <h3 class="font-weight-bold">¡ Felicitaciones !</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
+    <h3 class="font-weight-bold">Hemos generado su guía:</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
+    <h3 class="font-weight-bold">{{ guia }}</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
+    <h5>
+      Código interno: <strong> {{ codigointerno }} </strong>
+    </h5>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
+    <h5>
+      Código Recolección: <strong>{{ ConfirmationNumber }}</strong>
+    </h5>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
+    <h6>
+      Por favor tenga los siguiente documentos impresos al momento de la
+      recolección. Sin ellos no será posible recoger el envío: Guía (3 copias),
+      Factura proforma (2 copias).
+    </h6>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
+    <p>Hemos enviado esta información a su correo {{ email }}</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
+    <p>Descargar e Imprimir</p>
+  </div>
+</div>
+
+<div class="row" *ngIf="doc && !proforma && !carta">
+  <div class="col-2 offset-5 text-center">
+    <div class="text-center">Guia</div>
+    <button
+      mat-raised-button
+      (click)="download(doc)"
+      class="btn btn-just-icon btn-round btn-pinterest text-center"
+      download
+    >
+      <i class="fa fa-file"></i>
+    </button>
+  </div>
+</div>
+<div class="row justify-content-center" *ngIf="doc && proforma && carta">
+  <div class="col-2 offset-1 text-center">
+    <div class="">Guia</div>
+    <button
+      mat-raised-button
+      (click)="download(doc)"
+      class="btn btn-just-icon btn-round btn-pinterest"
+      download
+    >
+      <i class="fa fa-file"></i>
+    </button>
+  </div>
+  <div class="col-1 text-center">
+    <div class="text-left">Proforma</div>
+    <button
+      mat-raised-button
+      (click)="download(proforma)"
+      class="btn btn-just-icon btn-round btn-pinterest"
+      download
+    >
+      <i class="fa fa-file"></i>
+    </button>
+  </div>
+  <div class="col-3 text-left">
+    <div class="text-left">Carta de responsabilidad</div>
+    <div class="text-center w-50">
+      <button
+        mat-raised-button
+        (click)="download(carta)"
+        class="btn btn-just-icon btn-round btn-pinterest"
+        download
+      >
+        <i class="fa fa-file"></i>
+      </button>
+    </div>
+  </div>
+</div>

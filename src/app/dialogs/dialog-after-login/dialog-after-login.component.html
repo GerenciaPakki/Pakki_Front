@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>Modal de Ejemplo</h2>
+<div class="container-fluid">
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Opciones</mat-label>
+      <mat-select [(ngModel)]="selectedOption">
+        <mat-option value="opcion1">Opción 1</mat-option>
+        <mat-option value="opcion2">Opción 2</mat-option>
+        <mat-option value="opcion3">Opción 3</mat-option>
+        <mat-option value="opcion1">Opción 1</mat-option>
+        <mat-option value="opcion2">Opción 2</mat-option>
+        <mat-option value="opcion3">Opción 3</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+
+    <button mat-button mat-dialog-close>Cancelar</button>
+  </mat-dialog-actions>
+</div>

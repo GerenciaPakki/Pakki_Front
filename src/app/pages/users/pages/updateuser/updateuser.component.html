@@ -1,0 +1,90 @@
+<div id="updateuser" data-backdrop="static" data-keyboard="false" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Actualizar Usuario</h4>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="removeData()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form [formGroup]="userupdate">
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field>
+                                    <input matInput placeholder="Nombre" formControlName="name" type="text" />
+                                </mat-form-field>
+
+                            </div>
+                            <div class="col">
+                                <mat-form-field>
+                                    <input matInput placeholder="Apellido" formControlName="lastName" type="text" />
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field>
+                                    <mat-select placeholder="Tipo de Documento" formControlName="documentType">
+                                        <mat-option *ngFor="let doc of tipo_doc" [value]="doc.value">
+                                            {{ doc.viewValue }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col">
+                                <app-inputnumerico [label]="'Celular'" [control]="userupdate.get('mobil')"
+                                    [maxLength]="10"></app-inputnumerico>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field>
+                                    <input matInput placeholder="Dirección" formControlName="address" type="text" />
+                                </mat-form-field>
+
+                            </div>
+                            <div class="col">
+                                <app-inputnumerico [label]="'Télefono de Casa'"
+                                    [control]="userupdate.get('homephone')"></app-inputnumerico>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <app-input-country (PaisCambiado)="onCountryChange($event)"
+                                    [stateCtrl]="userupdate.get('country')" [label]="'Pais'"
+                                    [tipo]="1"></app-input-country>
+                            </div>
+                            <div class="col-6">
+                                <app-inputciudad [label]="'Ciudad'" [countrycode]="userupdate.get('countrycode')"
+                                    [ciudad]="userupdate.get('city')"
+                                    (ciudadCambiada)="onCityChange($event)"></app-inputciudad>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <mat-form-field class="example-full-width has-label">
+                                    <input matInput placeholder="Estado"
+                                        [value]=" userupdate?.get('city')?.value  + '-' + userupdate?.get('citycode')?.value "
+                                        type="text" disabled>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6">
+                                <app-inputnumerico [label]="'Télefono de Trabajo'"
+                                    [control]="userupdate.get('workphone')"></app-inputnumerico>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-warning float-right" (click)="sendData()"
+                            [disabled]="userupdate.invalid">
+                            Actualizar Usuario
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

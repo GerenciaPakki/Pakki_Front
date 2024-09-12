@@ -1,0 +1,50 @@
+<div
+  id="clonepostal"
+  data-backdrop="static"
+  data-keyboard="false"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Clonar Código Postal</h4>
+
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col">
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Ciudad"
+                  [(ngModel)]="newcity"
+                  type="text"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="btn btn-warning float-right"
+            (click)="clonepostal()"
+            [disabled]="newcity.length == 0"
+          >
+            Clonar Cógigo
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

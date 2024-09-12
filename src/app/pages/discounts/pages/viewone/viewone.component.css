@@ -1,0 +1,7 @@
+.my-pagination ::ng-deep .ngx-pagination .current {
+    background: orange;
+  }
+
+  #viewbyid.modal {
+    margin-top: 100px; /* Ajusta el valor según tus necesidades */
+  }

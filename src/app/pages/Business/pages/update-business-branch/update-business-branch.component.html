@@ -1,0 +1,182 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-8 offset-2">
+                <div class="card">
+                    <form [formGroup]="businessupdate">
+                        <div class="card-header card-header-warning card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">store</i>
+                            </div>
+                            <h4 class="card-title">Crear Sucursal</h4>
+                        </div>
+                        <div class="card-body mt-5">
+                            <div class="row">
+                                <div class="col-6">
+                                    <app-input-nit [nitctr]="businessupdate.get('businessname')"
+                                        [label]="'Nombre del Negocio'"
+                                        (aliadoCambiado)="BusinessSelect($event)"></app-input-nit>
+                                </div>
+                                <div class="col-6">
+                                    <mat-form-field class="example-full-width has-label">
+                                        <input type="text" matInput formControlName="tradename"
+                                            placeholder="Sucursal" />
+                                    </mat-form-field>
+
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <mat-form-field class="example-full-width has-label">
+                                        <input type="text" matInput formControlName="mainaddress"
+                                            placeholder="Dirección Principal" />
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput type="text" formControlName="email" placeholder="Email" />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <app-inputnumerico [control]="businessupdate.get('phonenumber')"
+                                        [label]="'Teléfono'" [maxLength]="10"></app-inputnumerico>
+                                </div>
+                                <div class="col-6">
+                                    <mat-form-field class="example-full-width has-label">
+
+                                        <input type="text" matInput formControlName="phonedescription"
+                                            placeholder="Descripción de teléfono" />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <app-inputnumerico [control]="businessupdate.get('cellphonenumber')"
+                                        [label]="'Celular'" [maxLength]="10"></app-inputnumerico>
+                                </div>
+                                <div class="col-6">
+                                    <mat-form-field class="example-full-width has-label">
+                                        <input type="text" matInput formControlName="cellphonedescription"
+                                            placeholder="Descripción Celular" />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <app-input-country (PaisCambiado)=" onCountryChange($event)"
+                                        [stateCtrl]="businessupdate.get('country')" [label]=" 'Pais Origen' "
+                                        [tipo]="1"></app-input-country>
+
+                                </div>
+                                <div class="col-6">
+                                    <app-inputciudad [label]="'Ciudad'"
+                                        [countrycode]="businessupdate.get('countrycode')"
+                                        [ciudad]="businessupdate.get('city')"
+                                        (ciudadCambiada)="onCityChange($event)"></app-inputciudad>
+                                </div>
+                            </div>
+
+                            <div class="row mb-4 mt-1">
+
+                                <div class="col-6">
+                                    <div formGroupName="WorkdayTomorrow">
+                                        <h5 class="font-weight-bold">Horario en la mañana</h5>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="">Hora inicial</label>
+                                                <div class="ngx-timepicker-field-example border-0">
+                                                    <ngx-timepicker-field [format]="24"
+                                                        formControlName="start"></ngx-timepicker-field>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="">Hora final</label>
+                                                <div class="ngx-timepicker-field-example border-0">
+                                                    <ngx-timepicker-field [format]="24"
+                                                        formControlName="end"></ngx-timepicker-field>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div formGroupName="WorkdayLate">
+                                        <h5 class="font-weight-bold">Horario en la Tarde</h5>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="">Hora inicial</label>
+                                                <div class="ngx-timepicker-field-example border-0">
+                                                    <ngx-timepicker-field [format]="24"
+                                                        formControlName="start"></ngx-timepicker-field>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="">Hora final</label>
+                                                <div class="ngx-timepicker-field-example border-0">
+                                                    <ngx-timepicker-field [format]="24"
+                                                        formControlName="end"></ngx-timepicker-field>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <mat-form-field>
+                                        <mat-select multiple placeholder="Dias" formControlName="serviceday"
+                                            name="Paris" ariaLabel="cities[0]">
+                                            <mat-option *ngFor="let day of days" [value]="day.value">
+                                                {{ day.viewValue }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-6">
+                                    <mat-form-field class="example-full-width has-label">
+                                        <input type="text" matInput formControlName="branchoffices"
+                                            placeholder="Cantidad de Sucursales" />
+                                    </mat-form-field>
+                                </div>
+                                <!--  <div class="col-6">
+
+                                    <mat-form-field class="example-full-width has-label">
+                                        <input matInput placeholder="Descuento" formControlName="discountBrach"
+                                            type="text" />
+                                    </mat-form-field>
+
+                                </div> -->
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <mat-form-field class="example-full-width has-label">
+                                        <input type="text" matInput formControlName="observation"
+                                            placeholder="Observaciones" />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="card-footer text-right">
+                            <button mat-raised-button (click)="SendData()" type="button" class="btn btn-warning"
+                                [disabled]="businessupdate.invalid">
+                                Crear
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

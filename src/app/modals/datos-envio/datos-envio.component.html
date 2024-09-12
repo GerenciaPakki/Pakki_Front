@@ -1,0 +1,57 @@
+<div id="envio" data-backdrop="static" data-keyboard="false" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Datos {{tipo == 1 ? 'Envio' : 'Destino'}}</h5>
+                <button type="button" (click)="clearData()" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form [formGroup]="formGroup">
+                        <mat-form-field class="">
+                            <input matInput placeholder="Pais Origen" [value]="formGroup?.get('CountryName')?.value"
+                                type="text" disabled>
+                        </mat-form-field>
+
+                        <app-input-city [label]="'Ciudad'" (ciudadCambiada)="onCityChange($event)"
+                            [formGroup]="formGroup" [ciudad]="ciudad" [tipo]="tipo"></app-input-city>
+
+                        <mat-form-field class="">
+                            <input matInput placeholder="Estado"
+                                [value]=" formGroup?.get('StateName')?.value  + '-' + formGroup?.get('StateCode')?.value "
+                                type="text" disabled>
+                        </mat-form-field>
+
+                        <mat-form-field class="">
+                            <input matInput placeholder="Código Postal" (keyup)="searchDataPostalCode()"
+                                [value]="formGroup?.get('PostalCode')?.value" formControlName="PostalCode" type="text">
+                        </mat-form-field>
+                    </form>
+
+                    <div class="row mt-3">
+                        <div class="col-6 align-self-start">
+                            <button type="button" (click)="SetData()" class="btn btn-success">Limpiar</button>
+                        </div>
+                        <div class="col-6 align-self-end">
+                            <button type="button" (click)="SaveData('envio')"
+                                class="btn btn-warning float-right">Guardar
+                                cambios</button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>

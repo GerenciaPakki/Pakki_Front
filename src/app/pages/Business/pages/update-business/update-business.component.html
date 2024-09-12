@@ -1,0 +1,152 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-8 offset-2">
+        <div class="card">
+          <form [formGroup]="businessupdate">
+            <div class="card-header card-header-warning card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">store</i>
+              </div>
+              <h4 class="card-title">Actualizar Negocio</h4>
+            </div>
+            <div class="card-body mt-5">
+              <div class="row">
+                <div class="col-6">
+                  <app-input-nit
+                    [nitctr]="businessupdate.get('businessname')"
+                    [label]="'Nombre del Negocio'"
+                    (aliadoCambiado)="BusinessSelect($event)"
+                  ></app-input-nit>
+                </div>
+                <div class="col-6">
+                  <mat-form-field class="example-full-width has-label">
+                    <input
+                      type="text"
+                      matInput
+                      formControlName="mainaddress"
+                      placeholder="Dirección Principal"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-6">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="email"
+                      placeholder="Email"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <app-typecompany
+                    (selectedCompany)="selectedCompany($event)"
+                    [defaultValue]="businessupdate.get('companytype').value"
+                  ></app-typecompany>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <app-inputnumerico
+                    [control]="businessupdate.get('phonenumber')"
+                    [label]="'Teléfono'"
+                  ></app-inputnumerico>
+                </div>
+                <div class="col-6">
+                  <mat-form-field class="example-full-width has-label">
+                    <input
+                      type="text"
+                      matInput
+                      formControlName="phonedescription"
+                      placeholder="Descripción de teléfono"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-6">
+                  <app-inputnumerico
+                    [control]="businessupdate.get('cellphonenumber')"
+                    [label]="'Celular'"
+                  ></app-inputnumerico>
+                </div>
+                <div class="col-6">
+                  <mat-form-field class="example-full-width has-label">
+                    <input
+                      type="text"
+                      matInput
+                      formControlName="cellphonedescription"
+                      placeholder="Descripción Celular"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <app-inputciudad
+                    [label]="'Ciudad'"
+                    [countrycode]="businessupdate.get('countrycode')"
+                    [countrycode]="country.get('countryCode')"
+                    [ciudad]="businessupdate.get('city')"
+                    (ciudadCambiada)="onCityChange($event)"
+                  ></app-inputciudad>
+                </div>
+                <div class="col-6">
+                  <mat-form-field class="example-full-width has-label">
+                    <input
+                      matInput
+                      placeholder="Estado"
+                      formControlName="state"
+                      type="text"
+                      disabled
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-6">
+                  <mat-form-field class="example-full-width has-label">
+                    <input
+                      type="text"
+                      matInput
+                      formControlName="branchoffices"
+                      placeholder="Cantidad de Sucursales"
+                    />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-6">
+                  <mat-form-field class="example-full-width has-label">
+                    <input
+                      type="text"
+                      matInput
+                      formControlName="observation"
+                      placeholder="Observaciones"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer text-right">
+              <button
+                mat-raised-button
+                (click)="SendData()"
+                type="button"
+                class="btn btn-warning"
+                [disabled]="businessupdate.invalid"
+              >
+                Actualizar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

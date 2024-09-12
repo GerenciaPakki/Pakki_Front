@@ -1,0 +1,102 @@
+<div id="createuser" data-backdrop="static" data-keyboard="false" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog  modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Crear Usuario</h4>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <form [formGroup]="usercreate">
+
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <input matInput placeholder="Nombre" formControlName="name" type="text" />
+                </mat-form-field>
+
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input matInput placeholder="Apellido" formControlName="lastName" type="text" />
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <mat-select placeholder="Tipo de Documento" formControlName="documentType">
+                    <mat-option *ngFor="let doc of tipo_doc" [value]="doc.value">
+                      {{ doc.viewValue }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <app-inputnumerico [label]="'Documento'" [control]="usercreate.get('docu')"></app-inputnumerico>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <app-inputnumerico [label]="'Celular'" [maxLength]="10"
+                  [control]="usercreate.get('mobil')"></app-inputnumerico>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input matInput placeholder="Dirección" formControlName="address" type="text" />
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-6">
+                <mat-form-field>
+                  <input matInput placeholder="Correo" formControlName="email" type="text" />
+                </mat-form-field>
+              </div>
+              <div class="col-6">
+                <app-inputnumerico [label]="'Télefono de Casa'" [maxLength]="10"
+                  [control]="usercreate.get('homephone')"></app-inputnumerico>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-6">
+                <app-input-country (PaisCambiado)="onCountryChange($event)" [stateCtrl]="usercreate.get('country')"
+                  [label]="'Pais'" [tipo]="1"></app-input-country>
+              </div>
+              <div class="col-6">
+                <app-inputciudad [label]="'Ciudad'" [countrycode]="usercreate.get('countrycode')"
+                  [ciudad]="usercreate.get('city')" (ciudadCambiada)="onCityChange($event)"></app-inputciudad>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-6">
+                <mat-form-field class="example-full-width has-label">
+                  <input matInput placeholder="Estado"
+                    [value]=" usercreate?.get('city')?.value  + '-' + usercreate?.get('citycode')?.value " type="text"
+                    disabled>
+                </mat-form-field>
+              </div>
+              <div class="col-6">
+                <app-inputnumerico [label]="'Télefono de Trabajo'"
+                  [control]="usercreate.get('workphone')"></app-inputnumerico>
+              </div>
+            </div>
+            <button type="button" class="btn btn-warning float-right" (click)="sendData()"
+              [disabled]="usercreate.invalid">
+              Crear
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

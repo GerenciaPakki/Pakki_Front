@@ -1,0 +1,90 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <input
+          class="form-control"
+          name="filter"
+          type="search"
+          [(ngModel)]="filter"
+          placeholder="Buscar..."
+        />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header card-header-icon card-header-warning">
+            <div class="card-icon">
+              <span class="material-symbols-outlined">
+                source_environment
+              </span>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <h4 class="card-title font-weight-bold">
+                  Información de Compañias
+                  <button
+                    class="btn btn-warning btn-sm float-right"
+                    (click)="openModal('createcompany')"
+                  >
+                    Crear Compañia
+                  </button>
+                </h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="text-black text-center">
+                <tr>
+                  <th class="font-weight-bold">Nombre</th>
+                  <th class="font-weight-bold">NIT</th>
+                  <th class="font-weight-bold">Ciudad</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="
+                    let item of dataCompanies
+                      | companiessearch : filter
+                      | paginate : { itemsPerPage: 5, currentPage: p }
+                  "
+                  class="text-black text-center"
+                >
+                  <td>{{ item.business.businessname }}</td>
+                  <td>{{ item.business.irs_nit }}</td>
+                  <td>{{ item.business.city }}</td>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn btn-warning btn-sm"
+                      (click)="openModal('moreinfo', item)"
+                    >
+                      Ver mas
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <pagination-controls
+              class="my-pagination text-center"
+              (pageChange)="p = $event"
+              previousLabel="Anterior"
+              nextLabel="Siguiente"
+            ></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-create-business
+  (companiescreated)="companieCreated($event)"
+></app-create-business>
+<app-infocompanies [data]="databranchoffices"></app-infocompanies>

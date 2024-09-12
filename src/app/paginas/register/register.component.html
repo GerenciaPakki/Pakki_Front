@@ -1,0 +1,162 @@
+<div class="wrapper wrapper-full-page">
+  <div class="page-header register-page header-filter" filter-color="black"
+    style="background-image: url('./assets/img/register.jpg'); background-size: cover; background-position: top center;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 ml-auto mr-auto">
+          <div class="card card-signup">
+            <h2 class="card-title text-center">Registrar</h2>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-5 ml-auto">
+                  <div class="info info-horizontal">
+                    <div class="icon icon-rose">
+                      <i class="material-icons">timeline</i>
+                    </div>
+                    <div class="description">
+                      <h4 class="info-title">Mejores Precios</h4>
+                      <p class="description">
+                        Te ofrecemos los mejores más bajos del mercado.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="info info-horizontal">
+                    <div class="icon icon-primary">
+                      <i class="material-icons">code</i>
+                    </div>
+                    <div class="description">
+                      <h4 class="info-title">Plataforma</h4>
+                      <p class="description">
+                        Plataforma Onprime para el servicio de los envíos
+                      </p>
+                    </div>
+                  </div>
+                  <div class="info info-horizontal">
+                    <div class="icon icon-info">
+                      <i class="material-icons">group</i>
+                    </div>
+                    <div class="description">
+                      <h4 class="info-title">Respaldo</h4>
+                      <p class="description">
+                        Nuestro soporte y respaldo apoyan tu negocio.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-5 mr-auto">
+                  <div class="social text-center">
+                    <button mat-raised-button class="btn btn-just-icon btn-round btn-twitter">
+                      <i class="fa fa-twitter"></i>
+                    </button>
+                    <button mat-raised-button class="btn btn-just-icon btn-round btn-dribbble">
+                      <i class="fa fa-dribbble"></i>
+                    </button>
+                    <button mat-raised-button class="btn btn-just-icon btn-round btn-facebook">
+                      <i class="fa fa-facebook"> </i>
+                    </button>
+                    <h4 class="mt-3"> o Ingreso Tradicional </h4>
+                  </div>
+                  <form class="form" [formGroup]="formRegister">
+                    <div class="form-group has-default">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">face</i>
+                          </span>
+                        </div>
+                        <input type="text" class="form-control" formControlName="name" placeholder="First Name...">
+                      </div>
+                    </div>
+                    <div class="form-group has-default">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">face</i>
+                          </span>
+                        </div>
+                        <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name...">
+                      </div>
+                    </div>
+                    <div class="form-group has-default">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">call</i>
+                          </span>
+                        </div>
+                        <input type="password" placeholder="Movil..." class="form-control" formControlName="movil">
+                      </div>
+                    </div>
+                    <div class="form-group has-default">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">mail</i>
+                          </span>
+                        </div>
+                        <input type="text" class="form-control" formControlName="email" placeholder="Email...">
+                      </div>
+                    </div>
+
+                    <div class="row ml-2 mt-2">
+                      <div class="col-12">
+                        <mat-form-field>
+                          <mat-select placeholder="Rol" ariaLabel="cities[0]">
+                            <mat-option (click)="(changetype(rol))" *ngFor="let rol of roles" value={{rol}}>
+                              {{ rol }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <mat-checkbox class="form-check">
+                      Acepto todos los
+                      <a href="#something">términos y condiciones</a>.
+                    </mat-checkbox>
+                    <div class="text-center">
+                      <button (click)="register()" class="btn btn-primary btn-round mt-4"
+                        type="button">Registrar</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer ">
+      <div class="container">
+        <!-- <nav class="pull-left">
+          <ul>
+            <li>
+              <a href="https://www.creative-tim.com">
+                Creative Tim
+              </a>
+            </li>
+            <li>
+              <a href="https://creative-tim.com/about-us">
+                About Us
+              </a>
+            </li>
+            <li>
+              <a href="http://blog.creative-tim.com">
+                Blog
+              </a>
+            </li>
+            <li>
+              <a href="https://www.creative-tim.com/license">
+                Licenses
+              </a>
+            </li>
+          </ul>
+        </nav> -->
+        <div class="copyright pull-right">
+          &copy;
+          {{test | date: 'yyyy'}}, desarrollado por
+          <a href="https://pakki.co" target="_blank">Pakki - Compras y Envíos</a>.
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>

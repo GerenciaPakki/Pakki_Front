@@ -1,0 +1,7 @@
+<mat-form-field>
+    <mat-select placeholder="Tipo de Compañia" name="typecompany" [(value)]="defaultValue">
+        <mat-option *ngFor="let item of data" [value]="item._id" (click)="clickCompany(item)">
+            {{ item.name }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

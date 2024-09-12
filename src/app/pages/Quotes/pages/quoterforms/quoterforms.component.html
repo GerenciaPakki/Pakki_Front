@@ -1,0 +1,1209 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 col-lg-12">
+        <div class="page-categories">
+          <div class="card">
+            <div *ngIf="stepers.firts" class="card-header">
+              <div class="card-header text-center">
+                <h3 class="text-center card-title">
+                  <strong>Compara la Mejor tarifa</strong> <br />
+                  Por Transportadora, Tiempo, o Precio
+                </h3>
+              </div>
+            </div>
+            <div class="card-body">
+              <form
+                [formGroup]="firststepForm"
+                *ngIf="stepers.firts || stepers.second"
+              >
+                <div class="row">
+                  <div class="col-md-12 col-lg-12">
+                    <app-datastep
+                      [firststepForm]="firststepForm"
+                      [paso2]="stepers.second"
+                      [peso]="firststepForm.controls.Weight"
+                      [largo]="firststepForm.controls.Length"
+                      [ancho]="firststepForm.controls.Width"
+                      [alto]="firststepForm.controls.Height"
+                      [tipoEnvio]="firststepForm.controls.tipoEnvio"
+                      [valor_asegurar]="firststepForm.controls.DeclaredValue"
+                      [name_label_valor_asegurar]="name_label_valor_asegurar"
+                      [fecha]="firststepForm.controls.fecha"
+                      [horario]="firststepForm.controls.horario"
+                      [Origin]="Origin"
+                      [Destination]="Destination"
+                      (valorCambiado)="onValorCambiado($event)"
+                    ></app-datastep>
+                  </div>
+                </div>
+              </form>
+
+              <app-carddetails
+                [Pais_Origen]="Origin.get('ciudad').value"
+                [Pais_Destino]="Destination.get('ciudad').value"
+                [Tipo]="tipoEnvio"
+                [Peso]="firststepForm.controls.Weight"
+                [valor_asegurar]="firststepForm.controls.DeclaredValue"
+                *ngIf="stepers.three"
+              ></app-carddetails>
+              <div
+                *ngIf="
+                  rowTransporting.length === 0 &&
+                  !showwizardtable &&
+                  !stepers.firts
+                "
+              >
+                <div class="spinner-grow text-primary" role="status">
+                  <span class="visually-hidden"></span>
+                </div>
+                <div class="spinner-grow text-secondary" role="status">
+                  <span class="visually-hidden"></span>
+                </div>
+                <div class="spinner-grow text-success" role="status">
+                  <span class="visually-hidden"></span>
+                </div>
+                <div class="spinner-grow text-danger" role="status">
+                  <span class="visually-hidden"></span>
+                </div>
+                <div class="spinner-grow text-warning" role="status">
+                  <span class="visually-hidden"></span>
+                </div>
+                <div class="spinner-grow text-info" role="status">
+                  <span class="visually-hidden"></span>
+                </div>
+                <div class="spinner-grow text-light" role="status">
+                  <span class="visually-hidden"></span>
+                </div>
+                <div class="spinner-grow text-dark" role="status">
+                  <span class="visually-hidden"></span>
+                </div>
+              </div>
+
+              <!-- <button (click)="openModal('proforma')"> Abrimodal</button> -->
+              <!--  -->
+              <div
+                class="container-fluid"
+                [ngStyle]="{ display: showwizardtable ? 'block' : 'none' }"
+              >
+                <ul
+                  class="nav nav-pills mb-3 nav-fill"
+                  id="pills-tab"
+                  role="tablist"
+                >
+                  <li class="nav-item" role="presentation">
+                    <button
+                      #elegirservicio
+                      class="nav-link active btn-block rounded-0"
+                      id="pills-home-tab"
+                      data-toggle="pill"
+                      data-target="#pills-home"
+                      type="button"
+                      role="tab"
+                      aria-controls="pills-home"
+                      aria-selected="true"
+                      [ngClass]="{ 'disabled-link': !firtstepenabled }"
+                      (click)="clickTitle(1)"
+                    >
+                      1. Elegir el servicio
+                    </button>
+                  </li>
+
+                  <li class="nav-item" role="presentation">
+                    <button
+                      #recoleccion
+                      class="nav-link btn-block rounded-0"
+                      id="pills-profile-tab"
+                      data-toggle="pill"
+                      data-target="#pills-profile"
+                      type="button"
+                      role="tab"
+                      aria-controls="pills-profile"
+                      aria-selected="false"
+                      [ngClass]="{ 'disabled-link': !secondstepenabled }"
+                      (click)="clickTitle(2)"
+                    >
+                      2. Completa los Datos y Recolección
+                    </button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button
+                      #pagar
+                      class="nav-link btn-block rounded-0"
+                      id="pills-contact-tab"
+                      data-toggle="pill"
+                      data-target="#pills-contact"
+                      type="button"
+                      role="tab"
+                      aria-controls="pills-contact"
+                      aria-selected="false"
+                      [ngClass]="{ 'disabled-link': !thirdstepenabled }"
+                      (click)="clickTitle(3)"
+                    >
+                      3. Realiza Pago
+                    </button>
+                  </li>
+
+                  <li class="nav-item" role="presentation">
+                    <button
+                      #print
+                      class="nav-link btn-block rounded-0"
+                      id="pills-pago-tab"
+                      data-toggle="pill"
+                      data-target="#pills-pago"
+                      type="button"
+                      role="tab"
+                      aria-controls="pills-pago"
+                      aria-selected="false"
+                      [ngClass]="{ 'disabled-link': !fourtstepenabled }"
+                      (click)="clickTitle(4)"
+                    >
+                      4. Recogemos tu envío
+                    </button>
+                  </li>
+                </ul>
+
+                <div class="tab-content" id="myTabContent">
+                  <div
+                    class="tab-pane fade show active"
+                    id="pills-home"
+                    role="tabpanel"
+                    aria-labelledby="pills-home-tab"
+                  >
+                    <div class="table-responsive">
+                      <table class="table table-hover" id="tabla_transport">
+                        <tbody>
+                          <tr
+                            [ngClass]="{ selected: i === selectedRow }"
+                            class="text-center"
+                            (click)="trasportadoraSelected(row, i)"
+                            *ngFor="let row of rowTransporting; let i = index"
+                          >
+                            <th class="text-center" scope="row">
+                              <div class="td-number img-fluid" matStepperNext>
+                                <a>
+                                  <img
+                                    src="./assets/img/{{
+                                      row.partners.toLowerCase()
+                                    }}.png"
+                                    alt="{{ row.partners }}"
+                                  />
+                                </a>
+                              </div>
+                            </th>
+                            <th>
+                              <div
+                                class="d-flex flex-column"
+                                (click)="trasportadoraSelected(row, i)"
+                                matStepperNext
+                              >
+                                <p class="text-warning">
+                                  {{ row.serviceName }}
+                                </p>
+                                <p>
+                                  Fecha de Estimada entrega
+                                  {{ row.deliveryDate }}
+                                </p>
+                              </div>
+                            </th>
+                            <th class="">
+                              <div
+                                class="d-flex flex-column"
+                                (click)="trasportadoraSelected(row, i)"
+                                matStepperNext
+                              >
+                                <h3 class="mt-2 font-weight-bold">
+                                  $
+                                  {{
+                                    row.shippingValue
+                                      | currency : "COP" : "symbol" : "4.0"
+                                  }}
+                                </h3>
+                                <h3 class="lead">
+                                  <small
+                                    ><del
+                                      >$
+                                      {{
+                                        row.PublicAmount
+                                          | currency : "COP" : "symbol" : "3.0"
+                                      }}</del
+                                    ></small
+                                  >
+                                </h3>
+
+                                <h3
+                                  class="lead"
+                                  *ngIf="businessUser == 'Pakki'"
+                                >
+                                  <small>
+                                    Valor Neto $
+                                    {{
+                                      row.valueNetoTrm
+                                        | currency : "COP" : "symbol" : "3.0"
+                                    }}
+                                  </small>
+                                </h3>
+                                <button
+                                  mat-raised-button
+                                  (click)="trasportadoraSelected(row, i)"
+                                  class="btn btn-warning border border-0"
+                                >
+                                  Me interesa
+                                </button>
+                              </div>
+                            </th>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <div class="card-footer">
+                      <div class="ml-auto">
+                        <input
+                          #next
+                          type="button"
+                          (click)="nextStep()"
+                          class="btn btn-next btn-fill btn-warning btn-wd"
+                          value="Continuar"
+                        />
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="tab-pane fade"
+                    id="pills-profile"
+                    role="tabpanel"
+                    aria-labelledby="pills-profile-tab"
+                  >
+                    <div class="card card-wizard">
+                      <div class="row">
+                        <div class="col-6">
+                          <div class="card">
+                            <div
+                              class="card-header card-header-warning card-header-icon"
+                            >
+                              <div class="card-icon">
+                                <i class="material-icons">mail_outline</i>
+                              </div>
+                              <h4 class="card-title">Datos Remitente</h4>
+                            </div>
+                            <div class="card-body">
+                              <form [formGroup]="shoppingTypeForm">
+                                <div class="row">
+                                  <div
+                                    class="col-12 col-lg-12 col-md-12 col-sm-12"
+                                  >
+                                    <mat-form-field class="w-100">
+                                      <input
+                                        type="text"
+                                        name="firstname"
+                                        matInput
+                                        id="text"
+                                        placeholder="Nombre y apellido del contacto"
+                                        formControlName="fullName"
+                                        required
+                                      />
+                                    </mat-form-field>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-lg-12">
+                                    <div class="input-group form-control-lg">
+                                      <mat-form-field class="w-100">
+                                        <input
+                                          type="text"
+                                          name="DocNumber"
+                                          matInput
+                                          formControlName="companyName"
+                                          id="text"
+                                          placeholder="Nombre de empresa o personal"
+                                          required
+                                        />
+                                      </mat-form-field>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-lg-12">
+                                    <div class="input-group form-control-lg">
+                                      <mat-form-field class="w-100">
+                                        <input
+                                          type="text"
+                                          matInput
+                                          minlength="6"
+                                          formControlName="direccion"
+                                          placeholder="Dirección"
+                                          required
+                                        />
+                                      </mat-form-field>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-lg-12">
+                                    <div class="input-group form-control-lg">
+                                      <mat-form-field class="w-100">
+                                        <input
+                                          type="text"
+                                          matInput
+                                          minlength="6"
+                                          formControlName="direccion_adicional"
+                                          placeholder="Dirección adicional"
+                                        />
+                                      </mat-form-field>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row mb-2">
+                                  <div class="col-lg-12">
+                                    <div class="input-group form-control-lg">
+                                      <mat-form-field class="w-100">
+                                        <input
+                                          type="text"
+                                          matInput
+                                          minlength="6"
+                                          formControlName="direccion_adicional_2"
+                                          placeholder="Dirección adicional"
+                                        />
+                                      </mat-form-field>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-lg-12">
+                                    <div class="form-control-lg">
+                                      <app-inputnumerico
+                                        [label]="'Télefono'"
+                                        [minLength]="6"
+                                        [maxLength]="10"
+                                        [control]="
+                                          shoppingTypeForm.get('telefono')
+                                        "
+                                      ></app-inputnumerico>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="row">
+                                  <div class="col-lg-12 mt-0">
+                                    <div class="input-group form-control-lg">
+                                      <mat-form-field class="w-100 mt-0">
+                                        <input
+                                          matInput
+                                          placeholder="Email"
+                                          type="mail"
+                                          id="exampleemalil"
+                                          formControlName="email"
+                                          name="email"
+                                          required
+                                        />
+                                      </mat-form-field>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                  <div class="col-lg-12">
+                                    <div class="input-group form-control-lg">
+                                      <mat-form-field class="w-100">
+                                        <input
+                                          type="text"
+                                          matInput
+                                          formControlName="Content"
+                                          placeholder="Resumen del contenido del paquete"
+                                        />
+                                      </mat-form-field>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row mt-3">
+                                  <div class="col-md-12 col-lg-12 d-inline">
+                                    <div class="float-right">
+                                      <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                          <span
+                                            class="material-symbols-outlined"
+                                          >
+                                            local_shipping
+                                          </span>
+                                        </div>
+                                        <div class="togglebutton ml-2">
+                                          <label>
+                                            <input
+                                              [checked]="selectRecogida"
+                                              (change)="
+                                                selectPickup(
+                                                  $event.target.checked
+                                                )
+                                              "
+                                              type="checkbox"
+                                            />
+                                            <span class="toggle"></span>
+                                            {{
+                                              "Programar
+                                                  recolección" | titlecase
+                                            }}
+                                          </label>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="card">
+                            <div
+                              class="card-header card-header-warning card-header-icon"
+                            >
+                              <div class="card-icon">
+                                <i class="material-icons">mail_outline</i>
+                              </div>
+                              <h4 class="card-title">Datos Destinatario</h4>
+                            </div>
+                            <div class="card-body">
+                              <form [formGroup]="shoppingTypeForm">
+                                <div class="row">
+                                  <div class="col-lg-12">
+                                    <div class="input-group form-control-lg">
+                                      <mat-form-field class="w-100">
+                                        <input
+                                          type="text"
+                                          name="fullnameDest"
+                                          matInput
+                                          id="text"
+                                          placeholder="Nombre y apellido del contacto"
+                                          formControlName="fullNameDestinatario"
+                                          required
+                                        />
+                                      </mat-form-field>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="row">
+                                  <div class="col-lg-12">
+                                    <div class="input-group form-control-lg">
+                                      <mat-form-field class="w-100">
+                                        <input
+                                          type="text"
+                                          matInput
+                                          placeholder="Nombre de empresa o personal"
+                                          formControlName="EmpresaDestino"
+                                          required
+                                        />
+                                      </mat-form-field>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-lg-12">
+                                    <div class="input-group form-control-lg">
+                                      <mat-form-field class="w-100">
+                                        <input
+                                          type="tel"
+                                          name="contacNumberDest"
+                                          matInput
+                                          id="text"
+                                          placeholder="Dirección"
+                                          [minLength]="6"
+                                          formControlName="direccionDestino"
+                                          required
+                                        />
+                                      </mat-form-field>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-lg-12">
+                                    <div class="input-group form-control-lg">
+                                      <mat-form-field class="w-100">
+                                        <input
+                                          type="tel"
+                                          name="contacNumberDest"
+                                          matInput
+                                          id="text"
+                                          placeholder="Dirección Adicional"
+                                          [minLength]="6"
+                                          formControlName="direccion_adicional_destino"
+                                        />
+                                      </mat-form-field>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-lg-12">
+                                    <div class="input-group form-control-lg">
+                                      <mat-form-field class="w-100">
+                                        <input
+                                          type="tel"
+                                          name="contacNumberDest"
+                                          matInput
+                                          id="text"
+                                          placeholder="Dirección Adicional"
+                                          [minLength]="6"
+                                          formControlName="direccion_adicional_destino_2"
+                                        />
+                                      </mat-form-field>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-lg-12">
+                                    <div class="form-control-lg">
+                                      <app-inputnumerico
+                                        [label]="'Télefono'"
+                                        [minLength]="6"
+                                        [maxLength]="10"
+                                        [control]="
+                                          shoppingTypeForm.get(
+                                            'telefonoDestino'
+                                          )
+                                        "
+                                      ></app-inputnumerico>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row mb-3">
+                                  <div class="col-lg-12">
+                                    <div class="input-group form-control-lg">
+                                      <mat-form-field class="w-100">
+                                        <input
+                                          matInput
+                                          placeholder="Email"
+                                          type="email"
+                                          formControlName="emailDestino"
+                                          name="dirDest"
+                                          required
+                                        />
+                                      </mat-form-field>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-4 text-left">
+                          <input
+                            type="button"
+                            class="btn btn-previous btn-fill btn-default btn-wd disabled"
+                            name="previous"
+                            value="Volver"
+                            (click)="goBack()"
+                          />
+                        </div>
+                        <div class="col-md-4 offset-md-4 text-right">
+                          <input
+                            type="button"
+                            (click)="nextStep()"
+                            [disabled]="shoppingTypeForm.invalid"
+                            class="btn btn-next btn-fill btn-warning btn-wd"
+                            value="Continuar"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-4 text-left">
+                          <button
+                            class="btn btn-fill btn-warning btn-wd"
+                            (click)="goBack()"
+                          >
+                            Volver
+                          </button>
+                        </div>
+                        <div class="col-md-4 offset-md-4 text-right">
+                          <button
+                            class="btn btn-fill btn-warning btn-wd"
+                            (click)="nextStep()"
+                            [disabled]="shoppingTypeForm.invalid"
+                          >
+                            Continuar
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="tab-pane fade"
+                    id="pills-contact"
+                    role="tabpanel"
+                    aria-labelledby="pills-profile-tab"
+                  >
+                    <div class="row">
+                      <div class="col-12">
+                        <app-metodos
+                          [activeview]="stepers.fourt"
+                          [tipopago]="ProformaTipopagoForm.get('tipoPago')"
+                          (tipopagoCambiado)="OntipoPagoSelected($event)"
+                          [transportSelected]="transportSelected"
+                          [shoppingTypeForm]="shoppingTypeForm"
+                          (payselected)="onPaySelected($event)"
+                        >
+                        </app-metodos>
+
+                        <div
+                          class="col-md-8 offset-md-4 text-right"
+                          *ngIf="
+                            ProformaTipopagoForm.get('tipoPago')?.value == '1'
+                          "
+                        >
+                          <input
+                            type="button"
+                            (click)="nextStep()"
+                            class="btn btn-next btn-fill btn-warning btn-wd"
+                            value="Continuar"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="tab-pane fade"
+                    id="pills-pago"
+                    role="tabpanel"
+                    aria-labelledby="pills-pago-tab"
+                  >
+                    <app-printdocument
+                      [doc]="guia"
+                      [guia]="numGuia"
+                      [email]="emailTo"
+                      [proforma]="proforma"
+                      [carta]="carta"
+                      [codigointerno]="codigointerno"
+                      [ConfirmationNumber]="ConfirmationNumber"
+                    ></app-printdocument>
+                    <div class="row">
+                      <div class="col-4 offset-8">
+                        <div class="float-right">
+                          <button
+                            type="button"
+                            (click)="resetProcess()"
+                            class="btn btn-warning"
+                          >
+                            Generar Nueva Cotización
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  id="modalRemitente"
+  data-backdrop="static"
+  data-keyboard="false"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Datos Recolección</h5>
+        <button
+          type="button"
+          (click)="disabledselect()"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <form [formGroup]="shoppingTypeForm">
+            <div class="row align-items-center">
+              <div class="col-4">
+                <mat-checkbox
+                  (change)="useDataRemitente($event.checked)"
+                  [checked]="use_data_remitente"
+                  >Usar Datos del remitente
+                </mat-checkbox>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-lg-12">
+                <div class="input-group form-control-lg">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      type="text"
+                      matInput
+                      formControlName="fullNameRecogida"
+                      placeholder="Nombre y apellido del contacto"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-lg-12">
+                <div class="form-control-lg">
+                  <app-inputnumerico
+                    [label]="'Télefono'"
+                    [control]="shoppingTypeForm.get('telefonoRecogida')"
+                  ></app-inputnumerico>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-lg-12">
+                <div class="input-group form-control-lg">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      type="text"
+                      matInput
+                      placeholder="Dirección"
+                      [minLength]="6"
+                      formControlName="direccionRecogida"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-lg-12">
+                <div class="input-group form-control-lg">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      type="text"
+                      matInput
+                      placeholder="Dirección Adicional"
+                      [minLength]="6"
+                      formControlName="direccionAdicionalRecogida"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-lg-12">
+                <div class="input-group form-control-lg">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      type="text"
+                      matInput
+                      placeholder="Dirección Adicional"
+                      [minLength]="6"
+                      formControlName="direccionAdicional2Recogida"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-lg-12">
+                <div class="input-group form-control-lg">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      type="text"
+                      matInput
+                      [value]="getHorario()"
+                      disabled="true"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-lg-12">
+                <div class="input-group form-control-lg">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      type="text"
+                      matInput
+                      formControlName="Reference"
+                      placeholder="Instrucciones adicionales de recolección"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          (click)="disabledselect()"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+        >
+          Cerrar
+        </button>
+        <button
+          type="button"
+          (click)="closeModal('modalRemitente')"
+          class="btn btn-primary"
+        >
+          Guardar cambios
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  id="proforma"
+  data-backdrop="static"
+  data-keyboard="false"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+>
+  <div class="modal-dialog modal-xl modal-top" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ "Crear Factura proforma" | titlecase }}</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <form [formGroup]="facturaForm">
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="formGroupExampleInput">Remitente</label>
+                  <h6>VAT/GST/ Identificación Tributaria</h6>
+
+                  <input
+                    type="text"
+                    formControlName="remitente"
+                    class="form-control"
+                    id="formGroupExampleInput"
+                    placeholder="Identificación"
+                  />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="formGroupExampleInput">Destinatario</label>
+                  <h6>VAT/GST/ Identificación Tributaria</h6>
+                  <input
+                    type="text"
+                    formControlName="destinatario"
+                    class="form-control"
+                    id="formGroupExampleInput"
+                    placeholder="Identificación"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <div class="">
+                  <label for="formGroupExampleInput">Razon de envio</label>
+
+                  <mat-form-field>
+                    <mat-label>Seleccione una Opcion</mat-label>
+                    <mat-select formControlName="razon">
+                      <mat-option value="1">Otra Razon de Envio</mat-option>
+                      <mat-option value="2">Regalos personales</mat-option>
+                      <mat-option value="3">Envio en retorno</mat-option>
+                      <mat-option value="4"
+                        >Ventas / Proposito comercial</mat-option
+                      >
+                      <mat-option value="5"
+                        >Muestras sin valor comercial</mat-option
+                      >
+                      <mat-option value="6">Uso Personal</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="formGroupExampleInput"
+                    >Nro Factura comercial</label
+                  >
+                  <input
+                    type="text"
+                    formControlName="nro_factura"
+                    class="form-control"
+                    id="formGroupExampleInput"
+                    placeholder="Factura"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3">
+                <h4 class="bg-success font-weight-bold">
+                  Peso Cotizado {{ firststepForm.get("Weight").value }} KG
+                </h4>
+              </div>
+              <div class="col-3">
+                <h4 class="bg-success font-weight-bold">
+                  Valor Asegurado
+                  {{ firststepForm.get("DeclaredValue").value }}
+                </h4>
+              </div>
+            </div>
+          </form>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead class="bgtable text-center">
+                    <tr>
+                      <th scope="col">Descripción</th>
+                      <th scope="col">Piezas</th>
+                      <th scope="col">Peso Total</th>
+                      <th scope="col">Valor unitario</th>
+                      <th scope="col">Valor total</th>
+                      <th scope="col">Acción</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of dataItemsAdd; let i = index">
+                      <th class="text-center" scope="row">
+                        {{ data.ItemDescription }}
+                      </th>
+                      <th class="text-center" scope="row">{{ data.Pieces }}</th>
+                      <th class="text-center" scope="row">
+                        {{ data.WeightPerUnit * data.Pieces }}
+                      </th>
+                      <th class="text-center" scope="row">
+                        {{ data.ValuePerUnit }}
+                      </th>
+                      <th class="text-center" scope="row">
+                        {{ data.ValueTotal }}
+                      </th>
+                      <th class="text-center" scope="row">
+                        <button
+                          (click)="removeData(i, data)"
+                          class="btn btn-primay"
+                        >
+                          Eliminar
+                        </button>
+                      </th>
+                    </tr>
+                    <tr>
+                      <th class="text-center" scope="row">
+                        <h6>
+                          Peso pendiente
+                          {{ peso_pendiente }} KG
+                        </h6>
+                      </th>
+                      <th class="text-center" scope="row">
+                        <h6>Piezas Totales {{ piezas_totales }}</h6>
+                      </th>
+                      <th class="text-center" scope="row"></th>
+                      <th class="text-center" scope="row"></th>
+                      <th class="text-center" scope="row">
+                        {{ precio_total }}
+                      </th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <form [formGroup]="facturaForm">
+            <div class="row align-items-center">
+              <div class="col-12 col-sm-12 col-md-12 col-lg-3">
+                <div class="form-group">
+                  <label for="formGroupExampleInput"
+                    >Cantidad y Descripción en ingles</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="ItemDescription"
+                    placeholder="Cantidad y Descripción"
+                  />
+                </div>
+              </div>
+              <div class="col-12 col-sm-12 col-md-12 col-lg-3">
+                <div class="form-group">
+                  <label for="formGroupExampleInput"
+                    >Descripción Adicional</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="descripcion_adicional"
+                    placeholder="Descripción"
+                  />
+                </div>
+              </div>
+              <div class="col-12 col-sm-12 col-md-12 col-lg-1">
+                <div class="form-group">
+                  <label for="formGroupExampleInput">Piezas</label>
+                  <input
+                    type="number"
+                    formControlName="Pieces"
+                    min="1"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="col-12 col-sm-12 col-md-12 col-lg-1">
+                <div class="form-group">
+                  <label for="formGroupExampleInput">Peso unit (KG)</label>
+                  <input
+                    type="number"
+                    inputmode="numeric"
+                    min="0"
+                    step="0.5"
+                    formControlName="WeightPerUnit"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="col-12 col-sm-12 col-md-12 col-lg-1">
+                <div class="form-group">
+                  <label for="formGroupExampleInput">Vlr und (US)</label>
+                  <input
+                    type="number"
+                    formControlName="ValuePerUnit"
+                    min="0"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="col-12 col-sm-12 col-md-12 col-lg-3 text-center">
+                <button
+                  (click)="addData()"
+                  [disabled]="facturaForm.invalid"
+                  class="btn btn-primary"
+                >
+                  Agregar
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <div class="mb-2">
+            <button
+              type="button"
+              [disabled]="validateValorAsegurar() || facturaForm.invalid"
+              (click)="closeModal('proforma')"
+              class="btn btn-primary float-right"
+            >
+              Guardar cambios
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  id="modalsedes"
+  data-backdrop="static"
+  data-keyboard="false"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content test">
+      <div class="modal-header">
+        <h5 class="modal-title">Términos y Condiciones</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <p>
+              <small>{{ transportSelected[0]?.conditions }}</small>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <input
+          id="btn-next"
+          type="button"
+          (click)="closeModal('modalsedes')"
+          class="btn btn-next btn-fill btn-warning btn-wd"
+          name="next"
+          value="Acepto"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  id="modalUPS"
+  data-backdrop="static"
+  data-keyboard="false"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content test">
+      <div class="modal-header">
+        <h5 class="modal-title font-weight-bold">Términos y Condiciones</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <p class="font-weight-bold">
+              {{ transportSelected[0]?.conditions }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-qrbancolombia
+  (payselected)="onPaySelected($event)"
+  [formGroup]="paymentreference"
+>
+</app-qrbancolombia>
+
+<app-dataphone
+  (payselected)="onPaySelected($event)"
+  [formGroup]="paymentreference"
+></app-dataphone>

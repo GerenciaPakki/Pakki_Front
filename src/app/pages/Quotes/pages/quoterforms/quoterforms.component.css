@@ -1,0 +1,61 @@
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+
+.mat-step-header {
+  pointer-events: none !important;
+}
+
+.selected {
+  background-color: rgb(193, 194, 192);
+}
+.bgtable {
+  background-color: rgb(193, 194, 192);
+}
+.disabled-link {
+  pointer-events: none;
+  text-decoration: none;
+  cursor: not-allowed;
+}
+
+.card-wizard {
+  box-shadow: 0 0 0 0 rgb(255, 255, 255);
+}
+.line {
+  display: inline-block;
+  position: relative;
+}
+
+.line::before {
+  content: "";
+  position: absolute;
+  left: 2%;
+  width: 80%;
+  height: 1px;
+  background-color: black;
+  transform: rotate(5deg);
+  transform-origin: top left;
+}
+
+.card-wizard[data-color="orange"] .moving-tab {
+  background-color: black !important;
+  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14),
+    0 7px 10px -5px rgba(255, 152, 0, 0.4);
+}
+
+.modal-top {
+  position: absolute;
+  top: 0;
+  transform: translateY(0);
+  margin-left: 20%;
+}
+
+.nav-pills .nav-item .nav-link.active {
+  color: #fff;
+  background-color: orange !important;
+  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14),
+    0 7px 10px -5px rgba(252, 101, 0, 0.4);
+}

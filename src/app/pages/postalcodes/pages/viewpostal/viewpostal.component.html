@@ -1,0 +1,68 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <input class="form-control" name="filter" type="search" [(ngModel)]="filter" placeholder="Buscar..." />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header card-header-icon card-header-warning">
+            <div class="card-icon">
+              <span class="material-symbols-outlined">
+                public
+              </span>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="text-black text-center">
+                <tr>
+                  <th>Nombre Pais</th>
+                  <th>Código Postal</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let country of datacountry | countrysearch : filter   | paginate: { itemsPerPage: 5, currentPage: p }"
+                  class="text-black text-center">
+                  <td>{{country.CountryName}}</td>
+                  <td>{{country.CountryCode}}</td>
+
+                  <td>
+
+                    <button class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top"
+                      title="Crear Código postal" (click)="openModal('createpostal', country.CountryCode)">
+                      <span class="material-symbols-outlined">
+                        add
+                      </span>
+                    </button>
+
+                    <button class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top"
+                      title="Buscar Código postal" (click)="openModal('search', country.CountryCode)">
+                      <span class="material-symbols-outlined">
+                        search
+                      </span>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <pagination-controls class="my-pagination text-center" (pageChange)="p = $event" previousLabel="Anterior"
+              nextLabel="Siguiente"></pagination-controls>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-createpostal [CountryCode]="countrycode"></app-createpostal>
+<app-searchonepostal [CountryCode]="countrycode"></app-searchonepostal>

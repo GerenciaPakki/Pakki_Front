@@ -1,0 +1,12 @@
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+        <mat-label>{{label}}</mat-label>
+        <input matInput aria-label="Envio" [matAutocomplete]="auto" (input)="onKeyUp()" [formControl]="nitctr">
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let aliado of filteredAliados | async" [value]="aliado.value"
+                (click)="AliadoSelect(aliado)">
+                <span class="ml-3">{{ aliado.name }}</span>
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</form>

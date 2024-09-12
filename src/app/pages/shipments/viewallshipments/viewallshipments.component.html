@@ -1,0 +1,197 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="row p-3">
+        <div class="col-12">
+          <input
+            class="form-control"
+            name="filtership"
+            type="search"
+            [(ngModel)]="filter"
+            placeholder="Buscar..."
+          />
+        </div>
+      </div>
+    </div>
+
+    <form [formGroup]="searchcompany">
+      <div class="card mt-1">
+        <div class="row p-3">
+          <div class="col-6">
+            <!-- <form class="example-form">
+              <mat-form-field class="example-full-width">
+                <mat-label>Nombre del negocio</mat-label>
+                <input
+                  matInput
+                  aria-label="name_buss"
+                  (input)="onKeyUpName($event)"
+                  [formControl]="searchcompany.get('businessname')"
+                />
+              </mat-form-field>
+            </form> -->
+            <app-input-namebranch
+              [nitctr]="searchcompany.get('businessname')"
+              (aliadoCambiado)="BusinessSelect($event)"
+              [label]="'Nombre del negocio'"
+            ></app-input-namebranch>
+          </div>
+          <div class="col-6">
+            <form class="example-form">
+              <mat-form-field class="example-full-width">
+                <mat-label>Numero de Guia</mat-label>
+                <input
+                  matInput
+                  aria-label="name_buss"
+                  (input)="onKeyUpGuia($event)"
+                  [formControl]="searchcompany.get('guideNumber')"
+                />
+              </mat-form-field>
+            </form>
+            <!-- <app-searchbranchoffices
+              [nit]="searchcompany.get('businessnit').value"
+              [label]="'Sucursal'"
+              (branchSelected)="branchSelect($event)"
+              [branchofficectr]="searchcompany.get('branchselected')"
+            >
+            </app-searchbranchoffices> -->
+          </div>
+        </div>
+
+        <div class="row" *ngIf="dataShipments.length > 0">
+          <div class="col-12">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="text-black text-center">
+                  <tr>
+                    <th>Guia</th>
+                    <th>Nombre de Oficina</th>
+                    <th>Destino</th>
+                    <th>Proveedor</th>
+                    <th>Fecha Creación</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let item of dataShipments
+                        | searchshipment : filter
+                        | paginate : { itemsPerPage: 10, currentPage: p };
+                      index as i
+                    "
+                    class="text-black text-center"
+                  >
+                    <td>{{ item?.shipment?.ShipmentCode }}</td>
+                    <td>{{ item?.business?.brachOffice }}</td>
+                    <td>{{ item?.Destination?.cityDestination?.cityName }}</td>
+                    <td>{{ item?.Provider?.partners }}</td>
+                    <td>{{ item?.dateCreate }}</td>
+
+                    <td>
+                      <button
+                        class="btn btn-warning mt-1 btn-sm"
+                        (click)="openModal('generatecomment', item)"
+                      >
+                        <span class="material-symbols-outlined">
+                          post_add
+                        </span>
+                      </button>
+                      <button
+                        class="btn btn-warning mt-1 btn-sm"
+                        (click)="getComentarios(item)"
+                      >
+                        <span class="material-symbols-outlined">
+                          visibility
+                        </span>
+                      </button>
+                      <button
+                        class="btn btn-warning btn-sm"
+                        (click)="downloadPdf(item.ShipmentID)"
+                      >
+                        <span class="material-symbols-outlined">
+                          download
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <pagination-controls
+                class="my-pagination text-center"
+                (pageChange)="p = $event"
+                previousLabel="Anterior"
+                nextLabel="Siguiente"
+              ></pagination-controls>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div
+  id="view_docu"
+  data-backdrop="static"
+  data-keyboard="false"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Descargar Documentos</h4>
+
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row mt-3">
+            <div class="col-4 text-center">
+              <button
+                type="button"
+                class="btn btn-warning"
+                (click)="openDocument(guia)"
+              >
+                Guía
+              </button>
+            </div>
+            <div class="col-4 text-center">
+              <button
+                type="button"
+                class="btn btn-warning"
+                (click)="openDocument(carta)"
+              >
+                carta
+              </button>
+            </div>
+            <div class="col-4 text-center">
+              <button
+                type="button"
+                class="btn btn-warning"
+                (click)="openDocument(proforma)"
+              >
+                Proforma
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-generatecomment
+  (commentCreated)="commentCreated($event)"
+  [estado]="estado"
+  [data]="datashipmentopen"
+></app-generatecomment>
+<app-seallcomments [data]="comentarios"></app-seallcomments>

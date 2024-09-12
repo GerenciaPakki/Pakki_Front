@@ -1,0 +1,144 @@
+<div
+  id="search"
+  data-backdrop="static"
+  data-keyboard="false"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Buscar Código Postal</h4>
+
+        <button
+          class="btn btn-warning btn-sm"
+          (click)="openModal('clonepostal')"
+        >
+          Clonar Código
+        </button>
+
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="removeData()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <form [formGroup]="viewPostalCode">
+            <div class="row">
+              <div class="col">
+                <app-searchbycode
+                  [label]="'Código Postal'"
+                  [countrycode]="viewPostalCode.get('CountryCode')"
+                  [postalcode]="viewPostalCode.get('PostalCodeCity')"
+                  (codigoCambiado)="codigoChange($event)"
+                ></app-searchbycode>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="Ciudad"
+                    formControlName="CityName"
+                    type="text"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="Orientación estatal"
+                    formControlName="StateGuidance"
+                    type="text"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="Número de Estado"
+                    formControlName="StateNumber"
+                    type="text"
+                    maxlength="10"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="Cam1"
+                    formControlName="Cam1"
+                    type="text"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="Cam2"
+                    formControlName="Cam2"
+                    type="text"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="Lat"
+                    formControlName="Lat"
+                    type="text"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="Log"
+                    formControlName="Log"
+                    type="text"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="Cam3"
+                    formControlName="Cam3"
+                    type="text"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-clonepostalcode [data]="viewPostalCode.value"></app-clonepostalcode>

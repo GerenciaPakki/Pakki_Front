@@ -1,0 +1,250 @@
+<div class="wrapper wrapper-full-page">
+  <div
+    class="page-header login-page header-filter"
+    style="
+      background-image: url('./assets/img/fondo-black.jpg');
+      background-size: cover;
+      background-position: top center;
+    "
+  >
+    <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-6 ml-auto mr-auto">
+          <div class="text-center">
+            <img src="/assets/img/logo_pakki.png" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-6 ml-auto mr-auto">
+          <form class="form" [formGroup]="formLogin">
+            <div class="card card-login card-hidden">
+              <div class="card-header card-header-warning text-center">
+                <h4 class="card-title">Log in</h4>
+                <!-- <div class="social-line">
+                                    <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
+                                        <i class="fa fa-facebook-square"></i>
+                                    </a>
+
+                                    <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
+                                        <i class="fa fa-google-plus"></i>
+                                    </a>
+                                </div> -->
+              </div>
+              <div class="card-body">
+                <span class="bmd-form-group">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">email</i>
+                      </span>
+                    </div>
+                    <input
+                      type="email"
+                      class="form-control"
+                      formControlName="email"
+                      placeholder="Usuario..."
+                    />
+                  </div>
+                </span>
+                <span class="bmd-form-group">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">lock_outline</i>
+                      </span>
+                    </div>
+                    <input
+                      type="password"
+                      class="form-control"
+                      formControlName="pass"
+                      placeholder="Password..."
+                    />
+                  </div>
+                </span>
+
+                <div class="text-center mt-2">
+                  <div class="row">
+                    <div class="col-10 align-self-center">
+                      <mat-checkbox
+                        class=""
+                        (change)="ischecked()"
+                        [checked]="ischeck"
+                        >Acepta
+                        <a
+                          href="https://pakki.co/terminos.html"
+                          style="color: blue"
+                          target="_blank"
+                          >términos y condiciones
+                        </a>
+                      </mat-checkbox>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer justify-content-center">
+                <div class="card-footer">
+                  <button
+                    [disabled]="!ischeck || formLogin.invalid"
+                    (click)="login()"
+                    mat-raised-button
+                    type="button"
+                    class="btn btn-fill btn-primary"
+                  >
+                    Acceder
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  id="myModal"
+  data-backdrop="static"
+  data-keyboard="false"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button> -->
+      </div>
+      <div class="modal-body">
+        <div class="row mb-1">
+          <div class="col-12 text-center">
+            <h3 class="card-title">
+              Bienvenido: <b>{{ data_collaborator?.name }}</b>
+            </h3>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <p class="ml-3">
+              <b>Por favor selecciona la compañia a Ingresar:</b>
+            </p>
+          </div>
+        </div>
+
+        <div class="col align-self-start">
+          <app-searchsedes
+            class=""
+            [sedes]="sedes"
+            [label]="'Aliados'"
+            (sedeCambiada)="sedeChange($event)"
+          ></app-searchsedes>
+        </div>
+
+        <!-- <div class="col-sm-2 text-center mt-3"><i class="material-icons">store</i></div>
+                    <div class="col-sm-10">
+                        <mat-form-field>
+                            <mat-select placeholder="Sede" [(ngModel)]="sedeselected" name="Paris"
+                                ariaLabel="cities[0]">
+                                <mat-option *ngFor="let city of sedes" [value]="city">
+                                    {{ city.tradeName }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div> -->
+      </div>
+      <div class="modal-footer">
+        <button
+          (click)="closeModal()"
+          [disabled]="!sedeselected"
+          type="button"
+          class="btn btn-fill btn-primary"
+        >
+          Continuar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  id="changepass"
+  data-backdrop="static"
+  data-keyboard="false"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cambiar Contraseña</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="changepass">
+          <div class="row">
+            <div class="col-xl-12">
+              <app-buttonpassword
+                [placeholder]="'Contraseña Anterior'"
+                [password]="changepass.get('document')"
+              ></app-buttonpassword>
+            </div>
+            <div class="col-xl-12">
+              <app-buttonpassword
+                [placeholder]="'Contraseña'"
+                [password]="changepass.controls.password"
+              ></app-buttonpassword>
+            </div>
+            <div class="col-xl-12">
+              <app-buttonpassword
+                [placeholder]="'Confirmar Contraseña'"
+                [password]="changepass.controls.validatepassword"
+              ></app-buttonpassword>
+            </div>
+
+            <div class="col-xl-12">
+              <mat-error
+                *ngIf="
+                  changepass.get('password').value !=
+                    changepass.get('validatepassword').value &&
+                  changepass.get('password').touched &&
+                  changepass.get('validatepassword').touched
+                "
+              >
+                Las contraseñas no <strong>coinciden</strong>
+              </mat-error>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          (click)="changePass()"
+          [disabled]="
+            changepass.invalid ||
+            changepass.get('password').value !==
+              changepass.get('validatepassword').value
+          "
+          type="button"
+          class="btn btn-fill btn-primary"
+        >
+          Continuar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

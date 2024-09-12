@@ -1,0 +1,64 @@
+<div
+  id="generatecomment"
+  data-backdrop="static"
+  data-keyboard="false"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Generar Comentarios</h4>
+
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-1 offset-11">
+              <div class="togglebutton">
+                <label>
+                  <input
+                    [checked]="estado"
+                    (change)="selectPickup($event.target.checked)"
+                    type="checkbox"
+                  />
+                  <span class="toggle"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Comentario"
+                  [(ngModel)]="comment"
+                  type="text"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            [disabled]="!comment"
+            class="btn btn-warning float-right"
+            (click)="createComment()"
+          >
+            Generar Comentario
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
