@@ -74,8 +74,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
 
     this.changepass = this.formBuilder.group({
-      document: ['', Validators.required],
-      password: ['', Validators.required, Validators.minLength(6)],
+      document: ['gerencia@yotraigo.com', Validators.required],
+      password: ['80141205', Validators.required, Validators.minLength(6)],
       validatepassword: ['', Validators.required, Validators.minLength(6)],
     });
   }
