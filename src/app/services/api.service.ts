@@ -13,10 +13,12 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   get(path: string): Observable<any> {
+    console.log(`${environment.API}${path}`)
     return this.http.get<any>(`${environment.API}${path}`).pipe(map((d) => d));
   }
 
   post(path: string, data?: any): any {
+    console.log(`${environment.API}${path}`)
     return this.http
       .post<any>(`${environment.API}${path}`, data)
       .pipe(map((d) => d));
