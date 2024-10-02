@@ -1116,7 +1116,10 @@ export class QuoterformsComponent implements OnInit, OnChanges, AfterViewInit {
               });
             } else {
               // console.log('no es un arreglo');
-              this.showNotification(objects.msg);
+              if(objects.msg.split('-1').length == 1 && objects.msg.toUpperCase().split('ERROR').length == 1) //Parametro que llega desde el back para saber si hay cobertura o no y si hay algun error, para que no se muestre, pero si va a estar guardado en el log del back.
+              {
+                this.showNotification(objects.msg);
+              }
             }
           }
         }

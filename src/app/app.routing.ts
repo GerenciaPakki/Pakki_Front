@@ -6,7 +6,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { QuoteComponent } from './pages/quote/quote.component';
 
 export const AppRoutes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },  
   {
     path: '',
     component: AuthLayoutComponent,
