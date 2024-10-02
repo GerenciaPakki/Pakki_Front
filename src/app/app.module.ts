@@ -96,7 +96,7 @@ registerLocaleData(localeEs, 'es');
   ],
   imports: [NgbModule],
   declarations: [
-    QuoteComponent
+    QuoteComponent,
   ],
 })
 export class MaterialModule {}
