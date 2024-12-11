@@ -3,7 +3,8 @@ import { Routes } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { AuthGuard } from './guards/auth.guard';
-import { QuoteComponent } from './pages/quote/quote.component';
+// import { QuoteComponent } from './pages/quote/quote.component';
+import { Quote1Component } from './pages/quote1/quote1.component'
 
 export const AppRoutes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },  
@@ -67,9 +68,13 @@ export const AppRoutes: Routes = [
           import('./pages/Quotes/quotes.module').then((m) => m.QuotesModule),
       },
       {
-        path: 'quote',
-        component: QuoteComponent,
+        path: 'quote1',
+        component: Quote1Component,
       },
+      // {
+      //   path: 'quote',
+      //   component: QuoteComponent,
+      // },
       {
         path: 'form',
         loadChildren: () =>
@@ -77,7 +82,7 @@ export const AppRoutes: Routes = [
       },
       {
         path: '**',
-        redirectTo: 'quotation',
+        redirectTo: 'quote1', //quotation
         pathMatch: 'full',
       },
     ],

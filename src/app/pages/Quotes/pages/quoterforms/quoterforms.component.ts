@@ -216,10 +216,10 @@ export class QuoterformsComponent implements OnInit, OnChanges, AfterViewInit {
     });
 
     this.shoppingTypeForm = this.fb.group({
-      fullName: ['', Validators.required],
-      companyName: [''],
+      fullName: ['Jhon Rico', Validators.required],
+      companyName: ['Jhon Rico'],
       direccion: [
-        '',
+        'Dg 15a#99-34',
         [
           Validators.required,
           Validators.minLength(4),
@@ -236,7 +236,7 @@ export class QuoterformsComponent implements OnInit, OnChanges, AfterViewInit {
       ],
       direcciones_adicionales: this.fb.array([]),
       telefono: [
-        '',
+        '3193652064',
         [
           Validators.required,
           Validators.minLength(10),
@@ -244,7 +244,7 @@ export class QuoterformsComponent implements OnInit, OnChanges, AfterViewInit {
         ],
       ],
       email: [
-        '',
+        'jhonalex945@hotmail.com',
         [
           Validators.required,
           Validators.pattern(
@@ -253,10 +253,10 @@ export class QuoterformsComponent implements OnInit, OnChanges, AfterViewInit {
         ],
       ],
 
-      fullNameDestinatario: ['', Validators.required],
-      EmpresaDestino: ['', Validators.required],
+      fullNameDestinatario: ['Cristian Rodriguez', Validators.required],
+      EmpresaDestino: ['Cristian Rodriguez', Validators.required],
       direccionDestino: [
-        '',
+        'Calle 67#45-45',
         [
           Validators.required,
           Validators.minLength(4),
@@ -272,7 +272,7 @@ export class QuoterformsComponent implements OnInit, OnChanges, AfterViewInit {
         [Validators.minLength(4), Validators.maxLength(36)],
       ],
       telefonoDestino: [
-        '',
+        '3193652064',
         [
           Validators.required,
           Validators.minLength(10),
@@ -280,7 +280,7 @@ export class QuoterformsComponent implements OnInit, OnChanges, AfterViewInit {
         ],
       ],
       emailDestino: [
-        '',
+        'jhonalex945@hotmail.com',
         [
           Validators.required,
           Validators.pattern(
@@ -289,7 +289,7 @@ export class QuoterformsComponent implements OnInit, OnChanges, AfterViewInit {
         ],
       ],
       direcciones_adicionales_destino: this.fb.array([]),
-      Content: ['', Validators.required],
+      Content: ['Ropa', Validators.required],
 
       fullNameRecogida: [''],
       telefonoRecogida: [''],
@@ -1114,14 +1114,15 @@ export class QuoterformsComponent implements OnInit, OnChanges, AfterViewInit {
                   this.rowTransporting.push(obj);
                 }
               });
-            } else {
-              // console.log('no es un arreglo');
-              if(objects.msg.split('-1').length == 1 && objects.msg.toUpperCase().split('ERROR').length == 1) //Parametro que llega desde el back para saber si hay cobertura o no y si hay algun error, para que no se muestre, pero si va a estar guardado en el log del back.
-              {
-                // console.log(objects.msg, objects.msg.split('-1').length, objects.msg.toUpperCase().split('ERROR'), objects.msg.toUpperCase().split('ERROR').length);
-                this.showNotification(objects.msg);
-              }
-            }
+            } 
+            // else {
+            //   // console.log('no es un arreglo');
+            //   if(objects.msg.split('-1').length == 1 && objects.msg.toUpperCase().split('ERROR').length >= 1) //Parametro que llega desde el back para saber si hay cobertura o no y si hay algun error, para que no se muestre, pero si va a estar guardado en el log del back.
+            //   {
+            //     // console.log(objects.msg, objects.msg.split('-1').length, objects.msg.toUpperCase().split('ERROR'), objects.msg.toUpperCase().split('ERROR').length);
+            //     this.showNotification(objects.msg);
+            //   }
+            // }
           }
         }
         this.rowTransporting.forEach((item) => {
@@ -1143,6 +1144,11 @@ export class QuoterformsComponent implements OnInit, OnChanges, AfterViewInit {
         this.showwizardtable = true;
         loading.close();
         this.scrollToTable();
+
+      if(this.rowTransporting.length === 0){
+        this.showNotification('No hay disponibilidad para el trayecto solicitado.');
+      }
+
       },
       (error) => {
         console.log('Error al cotizar producto', error);
