@@ -1611,7 +1611,7 @@ export class QuoterformsComponent implements OnInit, OnChanges, AfterViewInit {
         if (res.ok == false) {
           loadingAlert.close();
           this.sweetalertservice.errorMessage(
-            res.msg ? res.msg : 'Error al realizar Cotización del producto'
+            res.msg ? res.msg : 'Error al realizar Cotización del producto 1'
           );
           return;
         }
@@ -1631,7 +1631,7 @@ export class QuoterformsComponent implements OnInit, OnChanges, AfterViewInit {
           this.sweetalertservice.errorMessage(
             keyInfo.msg
               ? keyInfo.msg
-              : 'Error al realizar Cotización del producto'
+              : 'Error al realizar Cotización del producto 2'
           );
         }
         if (keyInfo.error) {
@@ -1639,7 +1639,7 @@ export class QuoterformsComponent implements OnInit, OnChanges, AfterViewInit {
           this.sweetalertservice.errorMessage(
             keyInfo.error
               ? keyInfo.error
-              : 'Error al realizar Cotización del producto'
+              : 'Error al realizar Cotización del producto 3'
           );
         } else {
           this.numGuia = keyInfo?.NumGuia;
@@ -1659,12 +1659,12 @@ export class QuoterformsComponent implements OnInit, OnChanges, AfterViewInit {
         }
       },
       (error) => {
-        console.log('Error al realizar Cotización de producto', error);
+        console.log('Error al realizar Cotización de producto 4', error);
         loadingAlert.close();
         this.sweetalertservice.errorMessage(
           error.error.msg
             ? error?.error?.msg
-            : 'Error al realizar envio de producto'
+            : 'Error al realizar envio de producto 5'
         );
         this.firtstepenabled = true;
         this.secondstepenabled = true;
