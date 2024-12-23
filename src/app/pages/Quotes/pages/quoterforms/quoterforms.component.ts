@@ -1657,7 +1657,7 @@ export class QuoterformsComponent implements OnInit, OnChanges, AfterViewInit {
           this.print.nativeElement.click();
           loadingAlert.close();
         }
-      },
+      }, 
       (error) => {
         console.log('Error al realizar Cotización de producto 4', error);
         loadingAlert.close();
